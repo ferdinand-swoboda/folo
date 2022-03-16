@@ -649,14 +649,6 @@
                                     <value>${project.basedir}/src/test/resources/db/ddl.sql</value>
                                 </property>
                             </properties>
-                            <forcedTypes>
-                                <forcedType>
-                                    <userType>Long[]</userType>
-                                    <includeExpression>.*\.RELATEDFOOIDS</includeExpression>
-                                    <converter>org.jooq.Converter.ofNullable(Object[].class, Long[].class, i -&gt;
-                                        (Long[])i, i -&gt; i)</converter>
-                                </forcedType>
-                            </forcedTypes>
                         </database>
                         <target>
                             <packageName>io.github.ferdinandswoboda.folo.data.schema</packageName>
