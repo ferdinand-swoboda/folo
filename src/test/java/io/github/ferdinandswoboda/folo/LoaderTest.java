@@ -71,9 +71,9 @@ public final class LoaderTest {
                 barTable.FOOID, 1L,
                 barTable.BAR_, 3)));
 
-    TestUtil.FooEntity expectedFoo = new TestUtil.FooEntity(1L, 1, null);
-    TestUtil.BarEntity expectedBar1 = new TestUtil.BarEntity(1L, 1L, 2, null, null);
-    TestUtil.BarEntity expectedBar2 = new TestUtil.BarEntity(2L, 1L, 3, null, null);
+    var expectedFoo = new TestUtil.FooEntity(1L, 1, null);
+    var expectedBar1 = new TestUtil.BarEntity(1L, 1L, 2, null, null);
+    var expectedBar2 = new TestUtil.BarEntity(2L, 1L, 3, null, null);
     expectedBar1.setFoo(expectedFoo);
     expectedBar2.setFoo(expectedFoo);
     expectedFoo.setBarList(ImmutableList.of(expectedBar1, expectedBar2));
@@ -112,14 +112,14 @@ public final class LoaderTest {
         createRecord(
             ImmutableMap.of(FOO.ID, 2L, FOO.FOO_, 1, BAR.ID, 2L, BAR.FOOID, 2L, BAR.BAR_, 2)));
 
-    TestUtil.FooEntity expectedFoo = new TestUtil.FooEntity(1L, 1, null);
-    TestUtil.FooEntity expectedFoo2 = new TestUtil.FooEntity(2L, 1, null);
-    TestUtil.FooEntity expectedFoo3 = new TestUtil.FooEntity(3L, 1, null);
-    TestUtil.BarEntity expectedBar = new TestUtil.BarEntity(1L, 1L, 2, null, null);
+    var expectedFoo = new TestUtil.FooEntity(1L, 1, null);
+    var expectedFoo2 = new TestUtil.FooEntity(2L, 1, null);
+    var expectedFoo3 = new TestUtil.FooEntity(3L, 1, null);
+    var expectedBar = new TestUtil.BarEntity(1L, 1L, 2, null, null);
     expectedBar.setFoo(expectedFoo);
-    TestUtil.BarEntity expectedBar2 = new TestUtil.BarEntity(2L, 2L, 2, null, null);
+    var expectedBar2 = new TestUtil.BarEntity(2L, 2L, 2, null, null);
     expectedBar2.setFoo(expectedFoo2);
-    TestUtil.BarEntity expectedBar3 = new TestUtil.BarEntity(3L, 3L, 2, null, null);
+    var expectedBar3 = new TestUtil.BarEntity(3L, 3L, 2, null, null);
     expectedBar3.setFoo(expectedFoo3);
 
     List<TestUtil.BarEntity> entities = l.finisher().apply(objectGraph);
@@ -146,8 +146,8 @@ public final class LoaderTest {
         createRecord(
             ImmutableMap.of(FOO.ID, 1L, FOO.FOO_, 1, BAR.ID, 1L, BAR.FOOID, 1L, BAR.BAR_, 2)));
 
-    TestUtil.FooEntity expectedFoo = new TestUtil.FooEntity(1L, 1, null);
-    TestUtil.BarEntity expectedBar = new TestUtil.BarEntity(1L, 1L, 2, null, null);
+    var expectedFoo = new TestUtil.FooEntity(1L, 1, null);
+    var expectedBar = new TestUtil.BarEntity(1L, 1L, 2, null, null);
     expectedBar.setFoo(expectedFoo);
 
     List<TestUtil.BarEntity> entities = l.finisher().apply(objectGraph);
@@ -181,9 +181,9 @@ public final class LoaderTest {
             ImmutableMap.of(FOO.ID, 1L, FOO.FOO_, 1, BAR.ID, 1L, BAR.FOOID, 1L, BAR.BAR_, 2)));
     accumulator.accept(objectGraph, createRecord(ImmutableMap.of(FOO.ID, 2L, FOO.FOO_, 2), BAR));
 
-    TestUtil.FooEntity expectedFoo1 = new TestUtil.FooEntity(1L, 1, null);
-    TestUtil.FooEntity expectedFoo2 = new TestUtil.FooEntity(2L, 2, null);
-    TestUtil.BarEntity expectedBar = new TestUtil.BarEntity(1L, 1L, 2, null, null);
+    var expectedFoo1 = new TestUtil.FooEntity(1L, 1, null);
+    var expectedFoo2 = new TestUtil.FooEntity(2L, 2, null);
+    var expectedBar = new TestUtil.BarEntity(1L, 1L, 2, null, null);
     expectedBar.setFoo(expectedFoo1);
     expectedFoo1.setBarOptional(Optional.of(expectedBar));
     expectedFoo2.setBarOptional(Optional.empty());
@@ -215,8 +215,8 @@ public final class LoaderTest {
         createRecord(
             ImmutableMap.of(FOO.ID, 1L, FOO.FOO_, 1, BAR.ID, 1L, BAR.FOOID, 1L, BAR.BAR_, 2)));
 
-    TestUtil.FooEntity expectedFoo = new TestUtil.FooEntity(1L, 1, null);
-    TestUtil.BarEntity expectedBar = new TestUtil.BarEntity(1L, 1L, 2, null, null);
+    var expectedFoo = new TestUtil.FooEntity(1L, 1, null);
+    var expectedBar = new TestUtil.BarEntity(1L, 1L, 2, null, null);
     expectedBar.setFooOptional(Optional.of(expectedFoo));
 
     assertIterableEquals(ImmutableList.of(expectedBar), l.finisher().apply(objectGraph));
@@ -241,7 +241,7 @@ public final class LoaderTest {
     accumulator.accept(
         objectGraph, createRecord(ImmutableMap.of(BAR.ID, 1L, BAR.BAR_, 2), FOO, BAR));
 
-    TestUtil.BarEntity expectedBar = new TestUtil.BarEntity(1L, null, 2, null, null);
+    var expectedBar = new TestUtil.BarEntity(1L, null, 2, null, null);
     expectedBar.setFooOptional(Optional.empty());
 
     assertIterableEquals(ImmutableList.of(expectedBar), l.finisher().apply(objectGraph));
@@ -262,7 +262,7 @@ public final class LoaderTest {
 
     accumulator.accept(objectGraph, createRecord(ImmutableMap.of(BAR.ID, 1L, BAR.BAR_, 2), FOO));
 
-    TestUtil.BarEntity expectedBar = new TestUtil.BarEntity(1L, null, 2, null, null);
+    var expectedBar = new TestUtil.BarEntity(1L, null, 2, null, null);
     expectedBar.setFooOptional(Optional.empty());
 
     assertIterableEquals(ImmutableList.of(expectedBar), l.finisher().apply(objectGraph));
@@ -290,9 +290,9 @@ public final class LoaderTest {
         objectGraph,
         createRecord(ImmutableMap.of(FOO.ID, 1L, FOO.FOO_, 1, BAR.ID, 2L, BAR.BAR_, 3)));
 
-    TestUtil.FooEntity expectedFoo = new TestUtil.FooEntity(1L, 1, null);
-    TestUtil.BarEntity expectedBar1 = new TestUtil.BarEntity(1L, 1L, 2, null, null);
-    TestUtil.BarEntity expectedBar2 = new TestUtil.BarEntity(2L, null, 3, null, null);
+    var expectedFoo = new TestUtil.FooEntity(1L, 1, null);
+    var expectedBar1 = new TestUtil.BarEntity(1L, 1L, 2, null, null);
+    var expectedBar2 = new TestUtil.BarEntity(2L, null, 3, null, null);
     expectedBar1.setFooOptional(Optional.of(expectedFoo));
     expectedBar2.setFooOptional(Optional.empty());
     expectedFoo.setBarList(ImmutableList.of(expectedBar1));
@@ -318,8 +318,8 @@ public final class LoaderTest {
     accumulator.accept(
         objectGraph, createRecord(ImmutableMap.of(BAR.ID, 2L, BAR.BAR_, 2, BAR.OTHERBARID, 2L)));
 
-    TestUtil.BarEntity expectedBar1 = new TestUtil.BarEntity(1L, null, 1, 2L, null);
-    TestUtil.BarEntity expectedBar2 = new TestUtil.BarEntity(2L, null, 2, 2L, null);
+    var expectedBar1 = new TestUtil.BarEntity(1L, null, 1, 2L, null);
+    var expectedBar2 = new TestUtil.BarEntity(2L, null, 2, 2L, null);
     expectedBar1.setOtherBar(Optional.of(expectedBar2));
     expectedBar2.setOtherBar(Optional.of(expectedBar2));
 
@@ -346,8 +346,8 @@ public final class LoaderTest {
         createRecord(
             ImmutableMap.of(FOO.ID, 2L, FOO.FOO_, 2, BAR.ID, 1L, BAR.FOOID, 2L, BAR.BAR_, 2)));
 
-    TestUtil.FooEntity expectedFoo = new TestUtil.FooEntity(1L, 1, null);
-    TestUtil.BarEntity expectedBar = new TestUtil.BarEntity(1L, 1L, 2, null, null);
+    var expectedFoo = new TestUtil.FooEntity(1L, 1, null);
+    var expectedBar = new TestUtil.BarEntity(1L, 1L, 2, null, null);
     expectedBar.setFoo(expectedFoo);
 
     assertThrows(ValidationException.class, () -> l.finisher().apply(objectGraph));
@@ -380,8 +380,8 @@ public final class LoaderTest {
                 .put(FOOBAR.BARID, 1L)
                 .build()));
 
-    TestUtil.FooEntity expectedFoo = new TestUtil.FooEntity(1L, 1, null);
-    TestUtil.BarEntity expectedBar = new TestUtil.BarEntity(1L, 1L, 2, null, null);
+    var expectedFoo = new TestUtil.FooEntity(1L, 1, null);
+    var expectedBar = new TestUtil.BarEntity(1L, 1L, 2, null, null);
     expectedBar.setFooList(ImmutableList.of(expectedFoo));
     expectedFoo.setBarList(ImmutableList.of(expectedBar));
 
@@ -475,7 +475,7 @@ public final class LoaderTest {
 
     List<TestUtil.FooEntity> entities = l.finisher().apply(objectGraph);
     assertEquals(2, entities.size());
-    for (TestUtil.FooEntity entity : entities) {
+    for (var entity : entities) {
       ImmutableList<TestUtil.BarEntity> barList = entity.getBarList();
       assertEquals(1, barList.size());
       assertEquals(1L, barList.get(0).getId());
@@ -540,7 +540,7 @@ public final class LoaderTest {
     accumulator.accept(objectGraph, createRecord(ImmutableMap.of(FOO.ID, 1L, FOO.FOO_, 1)));
     accumulator.accept(objectGraph, createRecord(ImmutableMap.of(FOO.ID, 1L, FOO.FOO_, 2)));
 
-    TestUtil.FooEntity expectedFoo = new TestUtil.FooEntity(1L, 1, null);
+    var expectedFoo = new TestUtil.FooEntity(1L, 1, null);
 
     List<TestUtil.FooEntity> entities = l.finisher().apply(objectGraph);
     assertIterableEquals(ImmutableList.of(expectedFoo), entities);
@@ -628,12 +628,12 @@ public final class LoaderTest {
     List<TestUtil.FooEntity> entitiesLeftFolded =
         l.finisher().apply(combiner.apply(combiner.apply(firstLeft, secondLeft), thirdLeft));
 
-    TestUtil.FooEntity expectedFoo1 = new TestUtil.FooEntity(1L, 1, null);
-    TestUtil.FooEntity expectedFoo2 = new TestUtil.FooEntity(2L, 2, null);
-    TestUtil.BarEntity expectedBar1 = new TestUtil.BarEntity(1L, null, 1, null, null);
-    TestUtil.BarEntity expectedBar2 = new TestUtil.BarEntity(2L, null, 2, null, null);
-    TestUtil.BarEntity expectedBar3 = new TestUtil.BarEntity(3L, null, 3, null, null);
-    TestUtil.BarEntity expectedBar4 = new TestUtil.BarEntity(4L, null, 4, null, null);
+    var expectedFoo1 = new TestUtil.FooEntity(1L, 1, null);
+    var expectedFoo2 = new TestUtil.FooEntity(2L, 2, null);
+    var expectedBar1 = new TestUtil.BarEntity(1L, null, 1, null, null);
+    var expectedBar2 = new TestUtil.BarEntity(2L, null, 2, null, null);
+    var expectedBar3 = new TestUtil.BarEntity(3L, null, 3, null, null);
+    var expectedBar4 = new TestUtil.BarEntity(4L, null, 4, null, null);
     expectedFoo1.setBarList(ImmutableList.of(expectedBar1, expectedBar3));
     expectedFoo2.setBarList(ImmutableList.of(expectedBar2, expectedBar4));
     expectedBar1.setFooList(ImmutableList.of(expectedFoo1));
@@ -858,14 +858,14 @@ public final class LoaderTest {
             .parallel()
             .collect(Loader.toLinkedObjectsWith(loader));
 
-    TestUtil.FooEntity expectedFoo1 = new TestUtil.FooEntity(1L, 1, null, 42);
-    TestUtil.FooEntity expectedFoo2 = new TestUtil.FooEntity(2L, 2, null, 43);
-    TestUtil.FooEntity expectedFoo4 = new TestUtil.FooEntity(4L, 4, null, 44);
-    TestUtil.FooEntity expectedFoo6 = new TestUtil.FooEntity(6L, 6, null, 24);
-    TestUtil.BarEntity expectedBar1 = new TestUtil.BarEntity(1L, 1L, 1, 2L, null);
-    TestUtil.BarEntity expectedBar2 = new TestUtil.BarEntity(2L, 2L, 2, 1L, null);
-    TestUtil.BarEntity expectedBar3 = new TestUtil.BarEntity(3L, 3L, 3, 3L, null);
-    TestUtil.BarEntity expectedBar4 = new TestUtil.BarEntity(4L, 4L, 4, null, null);
+    var expectedFoo1 = new TestUtil.FooEntity(1L, 1, null, 42);
+    var expectedFoo2 = new TestUtil.FooEntity(2L, 2, null, 43);
+    var expectedFoo4 = new TestUtil.FooEntity(4L, 4, null, 44);
+    var expectedFoo6 = new TestUtil.FooEntity(6L, 6, null, 24);
+    var expectedBar1 = new TestUtil.BarEntity(1L, 1L, 1, 2L, null);
+    var expectedBar2 = new TestUtil.BarEntity(2L, 2L, 2, 1L, null);
+    var expectedBar3 = new TestUtil.BarEntity(3L, 3L, 3, 3L, null);
+    var expectedBar4 = new TestUtil.BarEntity(4L, 4L, 4, null, null);
 
     expectedFoo1.setBarList(ImmutableList.of(expectedBar1, expectedBar2));
     expectedFoo2.setBarList(ImmutableList.of(expectedBar1));

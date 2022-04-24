@@ -133,7 +133,7 @@ final class TestUtil {
       if (!(o instanceof FooEntity)) {
         return false;
       }
-      FooEntity fooEntity = (FooEntity) o;
+      var fooEntity = (FooEntity) o;
       @Var
       boolean result =
           id == fooEntity.id
@@ -218,7 +218,7 @@ final class TestUtil {
       if (!(o instanceof BarEntity)) {
         return false;
       }
-      BarEntity barEntity = (BarEntity) o;
+      var barEntity = (BarEntity) o;
       @Var
       boolean result =
           id == barEntity.id

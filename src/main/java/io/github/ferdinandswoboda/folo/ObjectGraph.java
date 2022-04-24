@@ -84,9 +84,9 @@ final class ObjectGraph {
    */
   @SuppressWarnings("unchecked")
   <L, R> ObjectMapping<L, R> getObjectMapping(Relation<L, R> relation) {
-    Map<Long, L> leftObjectsById =
+    var leftObjectsById =
         (Map<Long, L>) entityAndIdToObject.getOrDefault(relation.getLeft(), Map.of());
-    Map<Long, R> rightObjectsById =
+    var rightObjectsById =
         (Map<Long, R>) entityAndIdToObject.getOrDefault(relation.getRight(), Map.of());
 
     Map<L, List<R>> objectToSuccessors =
@@ -128,7 +128,7 @@ final class ObjectGraph {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    ObjectGraph that = (ObjectGraph) o;
+    var that = (ObjectGraph) o;
     return entityAndIdToObject.equals(that.entityAndIdToObject)
         && relationToLinks.equals(that.relationToLinks);
   }
