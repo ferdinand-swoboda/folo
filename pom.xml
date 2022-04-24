@@ -66,7 +66,7 @@
         <version.immutables>2.9.0</version.immutables>
         <version.jdk>11</version.jdk>
         <version.jmh>1.35</version.jmh>
-        <version.jooq>3.15.9</version.jooq>
+        <version.jooq>3.16.5</version.jooq>
         <version.maven>3.8.1</version.maven>
         <version.maven-plugin-tools>3.6.4</version.maven-plugin-tools>
         <version.mockito>4.5.1</version.mockito>
@@ -649,14 +649,6 @@
                                     <value>${project.basedir}/src/test/resources/db/ddl.sql</value>
                                 </property>
                             </properties>
-                            <forcedTypes>
-                                <forcedType>
-                                    <userType>Long[]</userType>
-                                    <includeExpression>.*\.RELATEDFOOIDS</includeExpression>
-                                    <converter>org.jooq.Converter.ofNullable(Object[].class, Long[].class, i -&gt;
-                                        (Long[])i, i -&gt; i)</converter>
-                                </forcedType>
-                            </forcedTypes>
                         </database>
                         <target>
                             <packageName>io.github.ferdinandswoboda.folo.data.schema</packageName>
