@@ -58,7 +58,7 @@ final class Util {
         "Only %s keys of type Long are supported",
         keyType);
     @SuppressWarnings("unchecked")
-    TableField<R, Long> field = (TableField<R, Long>) table.field(fields.get(0));
+    var field = (TableField<R, Long>) table.field(fields.get(0));
     return field;
   }
 

@@ -59,7 +59,7 @@ public class TestBenchmark {
 
     @Setup(Level.Iteration)
     public void generateRecords() {
-      Random random = new Random(42);
+      var random = new Random(42);
       records =
           Stream.generate(
                   () -> {
