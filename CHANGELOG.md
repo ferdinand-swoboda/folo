@@ -7,12 +7,24 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [v2.0.0]
 
+Maintenance release bumping several dependencies, most importantly jOOQ 3.16.
+
+### Added
+
+- Add `@CheckReturnValue` annotations.
+
+### Changed
+
+- Require jOOQ 3.16.
+- Enforce non-null input in Folo's public API.
+- Rearrange readme content.
 
 ## [v1.0.0]
 
 This release marks the initial release of Folo - a fork of [Jolo]. Compared to [Jolo v0.0.2] it introduces a backwards-incompatible
-makeover of the public API by simplifying the main `Loader` API, requiring JDK v11+ and Jooq v3.15+ and dropping
+makeover of the public API by simplifying the main `Loader` API, requiring JDK v11+ and jOOQ v3.15 and dropping
 multiple public methods.
 
 ### Added
@@ -26,7 +38,7 @@ multiple public methods.
 
 ### Changed
 
-- Require JDK v11+ and Jooq v3.15+.
+- Require JDK v11+ and jOOQ v3.15.
 - Make `Entity`, `Relation` and `Loader` effectively immutable.
 - Custom relation loaders have to implement `Function<Record, Set<IdPair>` instead of `BiConsumer<Record, Set<IdPair>>`.
 - Provide improved validation failure messages in case conflicting tuples are encountered during linking.
@@ -51,8 +63,9 @@ string search & replace operations in places where you've previously used Jolo:
 Optionally, simplify e.g. `.collect(loader).stream().collect(toImmutableSet())`
 to `.collect(collectingAndThen(loader, ImmutableSet::copyOf))` and/or append `java.util.stream` operators as needed.
 
-[Unreleased]: https://github.com/ferdinand-swoboda/folo/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/ferdinand-swoboda/folo/compare/v2.0.0...HEAD
 
+[v2.0.0]: https://github.com/ferdinand-swoboda/folo/compare/v1.0.0...v2.0.0
 [v1.0.0]: https://github.com/ferdinand-swoboda/folo/compare/v0.0.2...v1.0.0
 
 [Jolo]: https://github.com/PicnicSupermarket/jolo

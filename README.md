@@ -7,29 +7,6 @@
 Successor to [Jolo], a _jOOQ Loader_. Folo is a utility library to add basic object-relation mapping to
 your [jOOQ][jooq] code.
 
-## How to Install
-
-Artifacts are hosted on [Maven's Central Repository][maven-central-browse]:
-
-### Gradle
-
-```groovy
-dependencies {
-    compile 'io.github.ferdinand-swoboda.folo:folo:1.0.0'
-}
-```
-
-### Maven
-
-```xml
-
-<dependency>
-    <groupId>io.github.ferdinand-swoboda.folo</groupId>
-    <artifactId>folo</artifactId>
-    <version>1.0.0</version>
-</dependency>
-```
-
 ## Features
 
 - Easy specification of relations between entities using a chaining API.
@@ -40,14 +17,6 @@ dependencies {
   implicit conversion of `FOO.FIELD` to `BAR.FIELD`).
 - Supports circular references.
 - Supports adding extra (non-table) fields to entities.
-
-## Limitations/Potential improvements
-
-- Make use of Java modules (introduced in Java 9).
-- Investigate nullness annotations (e.g. `javax.annotations`, `org.jspecify`).
-- Investigate `@Contract` annotations (`org.jetbrains`). 
-- Only primary / foreign keys of (Java) type `long` are supported i.e. no composite or UUID keys.
-- Relation mapping does not work for entities that are not based on a table in the DB schema.
 
 ## Example usage
 
@@ -136,9 +105,40 @@ class Repository {
 }
 ```
 
+## How to Install
+
+Artifacts are hosted on [Maven's Central Repository][maven-central-browse]:
+
+### Gradle
+
+```groovy
+dependencies {
+    compile 'io.github.ferdinand-swoboda.folo:folo:2.0.0'
+}
+```
+
+### Maven
+
+```xml
+
+<dependency>
+    <groupId>io.github.ferdinand-swoboda.folo</groupId>
+    <artifactId>folo</artifactId>
+    <version>2.0.0</version>
+</dependency>
+```
+
+## Limitations/Potential improvements
+
+- Make use of Java modules (introduced in Java 9).
+- Investigate nullness annotations (e.g. `javax.annotations`, `org.jspecify`).
+- Investigate `@Contract` annotations (`org.jetbrains`).
+- Only primary / foreign keys of (Java) type `long` are supported i.e. no composite or UUID keys.
+- Relation mapping does not work for entities that are not based on a table in the DB schema.
+
 ## Contributing
 
-Contributions are welcome! Feel free to file an [issue][new-issue] or open a
+Contributions of any kind are welcome! Feel free to file an [issue][new-issue] or open a
 [pull request][new-pr].
 
 When submitting changes, please make every effort to follow existing conventions and style in order to keep the code as
