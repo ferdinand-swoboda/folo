@@ -161,6 +161,6 @@ final class Relation<L, R> {
   private Set<IdPair> foreignKeyRelationLoader(Record record) {
     Long leftId = record.get(leftKey);
     Long rightId = record.get(rightKey);
-    return (leftId != null && rightId != null) ? Set.of(IdPair.of(leftId, rightId)) : Set.of();
+    return (leftId != null && rightId != null) ? Set.of(new IdPair(leftId, rightId)) : Set.of();
   }
 }
