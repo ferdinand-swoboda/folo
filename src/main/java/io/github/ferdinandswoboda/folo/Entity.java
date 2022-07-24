@@ -5,7 +5,7 @@ import static java.util.stream.Stream.concat;
 
 import java.util.Objects;
 import java.util.Optional;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 import org.jooq.Field;
 import org.jooq.Record;
 import org.jooq.Table;
