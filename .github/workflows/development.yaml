@@ -9,7 +9,8 @@ jobs:
       matrix:
         jdk: [ 11, 17 ]
     steps:
-      - uses: actions/checkout@v3
+      - name: Check out code
+        uses: actions/checkout@v3
       - name: Set up JDK
         uses: actions/setup-java@v3
         with:
@@ -17,7 +18,7 @@ jobs:
           distribution: 'temurin'
           cache: maven
       - name: Build & verify with Maven
-        run: mvn verify -strict-checksums --errors --show-version --batch-mode --update-snapshots --file pom.xml
+        run: mvn verify --show-version --update-snapshots
   release-snapshot:
     needs:
       - build
@@ -25,7 +26,8 @@ jobs:
     if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Check out code
+        uses: actions/checkout@v3
       - name: Set up Maven Central Repository
         uses: actions/setup-java@v3
         with:
@@ -37,7 +39,7 @@ jobs:
           gpg-private-key: ${{ secrets.MAVEN_GPG_PRIVATE_KEY }}
           gpg-passphrase: MAVEN_GPG_PASSPHRASE
       - name: Publish snapshot artifact
-        run: mvn --batch-mode -Prelease -Drevision=${GITHUB_SHA}-SNAPSHOT clean deploy
+        run: mvn --show-version -Prelease -Drevision=${GITHUB_SHA}-SNAPSHOT clean deploy
         env:
           MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
