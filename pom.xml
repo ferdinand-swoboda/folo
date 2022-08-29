@@ -91,6 +91,7 @@
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
                 <version>${version.guava}</version>
+                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>javax.annotation</groupId>
@@ -160,6 +161,7 @@
                 <groupId>org.postgresql</groupId>
                 <artifactId>postgresql</artifactId>
                 <version>${version.postgresql}</version>
+                <scope>test</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>
