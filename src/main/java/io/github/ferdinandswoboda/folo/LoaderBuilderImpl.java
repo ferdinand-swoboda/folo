@@ -1,5 +1,6 @@
 package io.github.ferdinandswoboda.folo;
 
+import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -106,6 +107,7 @@ final class LoaderBuilderImpl<T> implements LoaderBuilder<T> {
   /**
    * Used by {@link RelationBuilder} to return completed {@link Relation relations} to this builder.
    */
+  @CanIgnoreReturnValue
   LoaderBuilderImpl<T> addRelation(Relation<?, ?> relation) {
     relations.add(relation);
     return this;
