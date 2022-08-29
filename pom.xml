@@ -63,7 +63,7 @@
         <version.error-prone>2.14.0</version.error-prone>
         <version.guava>31.1-jre</version.guava>
         <version.guava-beta-checker>1.0</version.guava-beta-checker>
-        <version.immutables>2.9.0</version.immutables>
+        <version.immutables>2.9.1</version.immutables>
         <version.jdk>11</version.jdk>
         <version.jmh>1.35</version.jmh>
         <version.jooq>3.16.7</version.jooq>
@@ -254,7 +254,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-checkstyle-plugin</artifactId>
-                    <version>3.1.2</version>
+                    <version>3.2.0</version>
                     <configuration>
                         <!-- The plugin's "excludes" property accepts an Ant
                         pattern, but does not match against the full path. So
