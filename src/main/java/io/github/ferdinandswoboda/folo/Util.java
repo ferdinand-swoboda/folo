@@ -28,8 +28,8 @@ final class Util {
 
   static <L extends Record, R extends Record> Optional<TableField<?, Long>> getOptionalForeignKey(
       Table<L> from, Table<R> into) {
-    Table<L> fromTable = Util.unalias(from);
-    Table<R> intoTable = Util.unalias(into);
+    Table<L> fromTable = unalias(from);
+    Table<R> intoTable = unalias(into);
     List<ForeignKey<L, R>> keys = fromTable.getReferencesTo(intoTable);
     if (keys.isEmpty()) {
       return Optional.empty();

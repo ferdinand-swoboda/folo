@@ -51,6 +51,10 @@ public final class Entity<T, R extends Record> {
 
   /** Copy constructor (for internal use). */
   private Entity(Table<R> table, Class<T> type, Field<Long> primaryKey, Field<?>[] fields) {
+    Objects.requireNonNull(table);
+    Objects.requireNonNull(primaryKey);
+    Objects.requireNonNull(type);
+    Objects.requireNonNull(fields);
     this.table = table;
     this.primaryKey = primaryKey;
     this.type = type;
@@ -106,7 +110,7 @@ public final class Entity<T, R extends Record> {
      * record contains FOO.ID=1 and BAR.X=1, then without this measure, BAR.X would be used
      * instead of FOO.X.
      */
-    T result = record.into(resultFields).into(type);
+    @Nullable T result = record.into(resultFields).into(type);
     Objects.requireNonNull(result);
     return result;
   }

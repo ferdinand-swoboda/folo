@@ -5,6 +5,7 @@ import static io.github.ferdinandswoboda.folo.Util.validate;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import io.github.ferdinandswoboda.folo.Relation.Arity;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.BiConsumer;
@@ -82,6 +83,7 @@ public final class RelationBuilder<T, L, R> {
    */
   @CanIgnoreReturnValue
   public RelationBuilder<T, L, R> oneToZeroOrOne(TableField<?, Long> field) {
+    Objects.requireNonNull(field);
     setType(field, checkKey(field), Arity.ZERO_OR_ONE, Arity.ONE);
     return this;
   }
@@ -89,6 +91,7 @@ public final class RelationBuilder<T, L, R> {
   /** Specifies that the given field is a nullable foreign key for a one-to-one relation. */
   @CanIgnoreReturnValue
   public RelationBuilder<T, L, R> optionalOneToOne(TableField<?, Long> field) {
+    Objects.requireNonNull(field);
     setType(field, checkKey(field), Arity.ZERO_OR_ONE, Arity.ZERO_OR_ONE);
     return this;
   }
@@ -96,6 +99,7 @@ public final class RelationBuilder<T, L, R> {
   /** Specifies that the given field is a not-null foreign key for a one-to-one relation. */
   @CanIgnoreReturnValue
   public RelationBuilder<T, L, R> oneToOne(TableField<?, Long> field) {
+    Objects.requireNonNull(field);
     setType(field, checkKey(field), Arity.ONE, Arity.ONE);
     return this;
   }
@@ -103,6 +107,7 @@ public final class RelationBuilder<T, L, R> {
   /** Specifies that the given field is a nullable foreign key for a one-to-many relation. */
   @CanIgnoreReturnValue
   public RelationBuilder<T, L, R> zeroOrOneToMany(TableField<?, Long> field) {
+    Objects.requireNonNull(field);
     setType(field, checkKey(field), Arity.MANY, Arity.ZERO_OR_ONE);
     return this;
   }
@@ -110,6 +115,7 @@ public final class RelationBuilder<T, L, R> {
   /** Specifies that the given field is a not-null foreign key for a one-to-many relation. */
   @CanIgnoreReturnValue
   public RelationBuilder<T, L, R> oneToMany(TableField<?, Long> field) {
+    Objects.requireNonNull(field);
     setType(field, checkKey(field), Arity.MANY, Arity.ONE);
     return this;
   }
@@ -118,6 +124,8 @@ public final class RelationBuilder<T, L, R> {
   @CanIgnoreReturnValue
   public RelationBuilder<T, L, R> manyToMany(
       TableField<?, Long> field1, TableField<?, Long> field2) {
+    Objects.requireNonNull(field1);
+    Objects.requireNonNull(field2);
     // Requiring the fields to be from the same table is not strictly necessary.
     validate(
         field1.getTable().equals(field2.getTable()),
@@ -131,6 +139,7 @@ public final class RelationBuilder<T, L, R> {
   /** Specifies a setter for the left-hand side of a *-to-1 relation. */
   @CanIgnoreReturnValue
   public RelationBuilder<T, L, R> setOneLeft(BiConsumer<L, R> setter) {
+    Objects.requireNonNull(setter);
     validate(rightArity == Arity.ONE, "Right arity is %s", rightArity);
     leftSetter = setter;
     return this;
@@ -139,6 +148,7 @@ public final class RelationBuilder<T, L, R> {
   /** Specifies a setter for the right-hand side of a 1-to-* relation. */
   @CanIgnoreReturnValue
   public RelationBuilder<T, L, R> setOneRight(BiConsumer<R, L> setter) {
+    Objects.requireNonNull(setter);
     validate(leftArity == Arity.ONE, "Left arity is %s", leftArity);
     rightSetter = setter;
     return this;
@@ -147,6 +157,7 @@ public final class RelationBuilder<T, L, R> {
   /** Specifies a setter for the left-hand side of a *-to-0..1 relation. */
   @CanIgnoreReturnValue
   public RelationBuilder<T, L, R> setZeroOrOneLeft(BiConsumer<L, Optional<R>> setter) {
+    Objects.requireNonNull(setter);
     validate(rightArity == Arity.ZERO_OR_ONE, "Right arity is %s", rightArity);
     leftSetter = setter;
     return this;
@@ -155,6 +166,7 @@ public final class RelationBuilder<T, L, R> {
   /** Specifies a setter for the right-hand side of a 0..1-to-* relation. */
   @CanIgnoreReturnValue
   public RelationBuilder<T, L, R> setZeroOrOneRight(BiConsumer<R, Optional<L>> setter) {
+    Objects.requireNonNull(setter);
     validate(leftArity == Arity.ZERO_OR_ONE, "Left arity is %s", leftArity);
     rightSetter = setter;
     return this;
@@ -163,6 +175,7 @@ public final class RelationBuilder<T, L, R> {
   /** Specifies a setter for the left-hand side of a *-to-many relation. */
   @CanIgnoreReturnValue
   public RelationBuilder<T, L, R> setManyLeft(BiConsumer<L, List<R>> setter) {
+    Objects.requireNonNull(setter);
     validate(rightArity == Arity.MANY, "Right arity is %s", rightArity);
     leftSetter = setter;
     return this;
@@ -171,6 +184,7 @@ public final class RelationBuilder<T, L, R> {
   /** Specifies a setter for the right-hand side of a many-to-* relation. */
   @CanIgnoreReturnValue
   public RelationBuilder<T, L, R> setManyRight(BiConsumer<R, List<L>> setter) {
+    Objects.requireNonNull(setter);
     validate(leftArity == Arity.MANY, "Left arity is %s", leftArity);
     rightSetter = setter;
     return this;
@@ -179,6 +193,7 @@ public final class RelationBuilder<T, L, R> {
   /** Specifies a function to programmatically identify relation pairs in loaded records. */
   @CanIgnoreReturnValue
   public RelationBuilder<T, L, R> setRelationLoader(Function<Record, Set<IdPair>> relationLoader) {
+    Objects.requireNonNull(relationLoader);
     this.relationLoader = Optional.of(relationLoader);
     return this;
   }
