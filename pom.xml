@@ -69,7 +69,7 @@
         <version.jooq>3.16.7</version.jooq>
         <version.maven>3.8.1</version.maven>
         <version.maven-plugin-tools>3.6.4</version.maven-plugin-tools>
-        <version.mockito>4.6.1</version.mockito>
+        <version.mockito>4.7.0</version.mockito>
         <version.nullaway>0.9.5</version.nullaway>
         <version.postgresql>42.5.0</version.postgresql>
         <version.surefire>2.22.2</version.surefire>
