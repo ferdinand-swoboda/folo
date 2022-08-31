@@ -63,8 +63,7 @@
         <version.error-prone>2.15.0</version.error-prone>
         <version.guava>31.1-jre</version.guava>
         <version.guava-beta-checker>1.0</version.guava-beta-checker>
-        <version.immutables>2.9.1</version.immutables>
-        <version.jdk>11</version.jdk>
+        <version.jdk>17</version.jdk>
         <version.jmh>1.35</version.jmh>
         <version.jooq>3.16.7</version.jooq>
         <version.maven>3.8.1</version.maven>
@@ -117,11 +116,6 @@
                 <groupId>org.apache.maven.plugin-tools</groupId>
                 <artifactId>maven-plugin-annotations</artifactId>
                 <version>${version.maven-plugin-tools}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.immutables</groupId>
-                <artifactId>value-annotations</artifactId>
-                <version>${version.immutables}</version>
             </dependency>
             <dependency>
                 <groupId>org.jetbrains</groupId>
@@ -180,11 +174,6 @@
             <groupId>javax.annotation</groupId>
             <artifactId>javax.annotation-api</artifactId>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.immutables</groupId>
-            <artifactId>value-annotations</artifactId>
-            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.jetbrains</groupId>
@@ -300,11 +289,6 @@
                     <version>${version.maven}</version>
                     <configuration>
                         <annotationProcessorPaths>
-                            <path>
-                                <groupId>org.immutables</groupId>
-                                <artifactId>value-processor</artifactId>
-                                <version>${version.immutables}</version>
-                            </path>
                             <path>
                                 <groupId>com.google.guava</groupId>
                                 <artifactId>guava</artifactId>

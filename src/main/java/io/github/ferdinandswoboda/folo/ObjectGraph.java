@@ -93,10 +93,10 @@ final class ObjectGraph {
         relationToLinks.getOrDefault(relation, Set.of()).stream()
             .collect(
                 groupingBy(
-                    idPair -> getObject(relation.getLeft(), leftObjectsById, idPair.getLeftId()),
+                    idPair -> getObject(relation.getLeft(), leftObjectsById, idPair.leftId()),
                     mapping(
                         idPair ->
-                            getObject(relation.getRight(), rightObjectsById, idPair.getRightId()),
+                            getObject(relation.getRight(), rightObjectsById, idPair.rightId()),
                         toUnmodifiableList())));
     leftObjectsById.values().forEach(o -> objectToSuccessors.putIfAbsent(o, List.of()));
 
@@ -104,14 +104,13 @@ final class ObjectGraph {
         relationToLinks.getOrDefault(relation, Set.of()).stream()
             .collect(
                 groupingBy(
-                    idPair -> getObject(relation.getRight(), rightObjectsById, idPair.getRightId()),
+                    idPair -> getObject(relation.getRight(), rightObjectsById, idPair.rightId()),
                     mapping(
-                        idPair ->
-                            getObject(relation.getLeft(), leftObjectsById, idPair.getLeftId()),
+                        idPair -> getObject(relation.getLeft(), leftObjectsById, idPair.leftId()),
                         toUnmodifiableList())));
     rightObjectsById.values().forEach(o -> objectToPredecessors.putIfAbsent(o, List.of()));
 
-    return ObjectMapping.of(objectToSuccessors, objectToPredecessors);
+    return new ObjectMapping<>(objectToSuccessors, objectToPredecessors);
   }
 
   /** Objects loaded by the given {@link Entity entity}. */

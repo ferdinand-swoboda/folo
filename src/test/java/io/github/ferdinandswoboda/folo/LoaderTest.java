@@ -408,7 +408,7 @@ public final class LoaderTest {
             .manyToMany(foo, bar, FOOBAR)
             .setManyLeft(TestUtil.FooEntity::setBarList)
             .setManyRight(TestUtil.BarEntity::setFooList)
-            .setRelationLoader(record -> Set.of(IdPair.of(1, 1)))
+            .setRelationLoader(record -> Set.of(new IdPair(1, 1)))
             .build();
 
     ObjectGraph objectGraph = l.supplier().get();
@@ -897,6 +897,6 @@ public final class LoaderTest {
     if (fooIds == null) {
       return Set.of();
     }
-    return Stream.of(fooIds).map(fooId -> IdPair.of(fooId, barId)).collect(Collectors.toSet());
+    return Stream.of(fooIds).map(fooId -> new IdPair(fooId, barId)).collect(Collectors.toSet());
   }
 }
