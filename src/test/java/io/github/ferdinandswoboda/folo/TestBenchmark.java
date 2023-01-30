@@ -10,7 +10,6 @@ import com.google.common.collect.ImmutableMap;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.jooq.Record;
 import org.openjdk.jmh.annotations.Benchmark;
@@ -76,16 +75,16 @@ public class TestBenchmark {
                             FOOBAR.BARID, (long) bar));
                   })
               .limit(numRecords)
-              .collect(Collectors.toUnmodifiableList());
+              .toList();
     }
   }
 
   @Benchmark
   @BenchmarkMode(Mode.AverageTime)
   @Fork(warmups = 1, value = 1)
-  @Warmup(iterations = 2, time = 1)
   @Measurement(iterations = 20, time = 1)
   @OutputTimeUnit(TimeUnit.MICROSECONDS)
+  @Warmup(iterations = 2, time = 1)
   public void benchmark(BenchmarkState state, Blackhole hole) {
     List<TestUtil.FooEntity> objects =
         state.records.stream().collect(toLinkedObjectsWith(state.loader));

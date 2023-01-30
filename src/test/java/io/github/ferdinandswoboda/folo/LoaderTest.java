@@ -5,6 +5,7 @@ import static io.github.ferdinandswoboda.folo.data.schema.base.Tables.BAR;
 import static io.github.ferdinandswoboda.folo.data.schema.base.Tables.BAZ;
 import static io.github.ferdinandswoboda.folo.data.schema.base.Tables.FOO;
 import static io.github.ferdinandswoboda.folo.data.schema.base.Tables.FOOBAR;
+import static java.util.stream.Collectors.toSet;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertIterableEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -14,6 +15,7 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import io.github.ferdinandswoboda.folo.data.schema.base.tables.Bar;
 import io.github.ferdinandswoboda.folo.data.schema.base.tables.Foo;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -21,21 +23,20 @@ import java.util.function.BiConsumer;
 import java.util.function.BinaryOperator;
 import java.util.function.Function;
 import java.util.function.Supplier;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.jooq.Field;
 import org.jooq.Record;
 import org.jooq.impl.DSL;
 import org.junit.jupiter.api.Test;
 
-public final class LoaderTest {
+final class LoaderTest {
   @Test
-  public void testOneToMany() {
+  void oneToMany() {
     runOneToManyTest(FOO, BAR);
   }
 
   @Test
-  public void testOneToManyAliased() {
+  void oneToManyAliased() {
     runOneToManyTest(FOO.as("BAR"), BAR.as("BAZ"));
   }
 
@@ -83,14 +84,14 @@ public final class LoaderTest {
   }
 
   @Test
-  public void testOneToManyWrongWayAround() {
+  void oneToManyWrongWayAround() {
     Entity<TestUtil.FooEntity, ?> foo = new Entity<>(FOO, TestUtil.FooEntity.class);
     Entity<TestUtil.BarEntity, ?> bar = new Entity<>(BAR, TestUtil.BarEntity.class);
     assertThrows(IllegalArgumentException.class, () -> Loader.of(foo).oneToMany(bar, foo));
   }
 
   @Test
-  public void testEncounterOrder() {
+  void encounterOrder() {
     Entity<TestUtil.FooEntity, ?> foo = new Entity<>(FOO, TestUtil.FooEntity.class);
     Entity<TestUtil.BarEntity, ?> bar = new Entity<>(BAR, TestUtil.BarEntity.class);
     Loader<TestUtil.BarEntity> l =
@@ -127,7 +128,7 @@ public final class LoaderTest {
   }
 
   @Test
-  public void testOneToOne() {
+  void oneToOne() {
     Entity<TestUtil.FooEntity, ?> foo = new Entity<>(FOO, TestUtil.FooEntity.class);
     Entity<TestUtil.BarEntity, ?> bar = new Entity<>(BAR, TestUtil.BarEntity.class);
     Loader<TestUtil.BarEntity> l =
@@ -155,14 +156,14 @@ public final class LoaderTest {
   }
 
   @Test
-  public void testOneToOneAmbiguous() {
+  void oneToOneAmbiguous() {
     Entity<TestUtil.BarEntity, ?> bar = new Entity<>(BAR, TestUtil.BarEntity.class);
     Entity<TestUtil.BazEntity, ?> baz = new Entity<>(BAZ, TestUtil.BazEntity.class);
     assertThrows(ValidationException.class, () -> Loader.of(bar).oneToOne(bar, baz));
   }
 
   @Test
-  public void testOneToZeroOrOne() {
+  void oneToZeroOrOne() {
     Entity<TestUtil.FooEntity, ?> foo = new Entity<>(FOO, TestUtil.FooEntity.class);
     Entity<TestUtil.BarEntity, ?> bar = new Entity<>(BAR, TestUtil.BarEntity.class);
     Loader<TestUtil.FooEntity> l =
@@ -193,7 +194,7 @@ public final class LoaderTest {
   }
 
   @Test
-  public void testOptionalOneToOne() {
+  void optionalOneToOne() {
     Entity<TestUtil.FooEntity, ?> foo = new Entity<>(FOO, TestUtil.FooEntity.class);
     Entity<TestUtil.BarEntity, ?> bar = new Entity<>(BAR, TestUtil.BarEntity.class);
     Loader<TestUtil.BarEntity> l =
@@ -223,7 +224,7 @@ public final class LoaderTest {
   }
 
   @Test
-  public void testEmptyOptionalOneToOne() {
+  void emptyOptionalOneToOne() {
     Entity<TestUtil.FooEntity, ?> foo = new Entity<>(FOO, TestUtil.FooEntity.class);
     Entity<TestUtil.BarEntity, ?> bar = new Entity<>(BAR, TestUtil.BarEntity.class);
     Loader<TestUtil.BarEntity> l =
@@ -248,7 +249,7 @@ public final class LoaderTest {
   }
 
   @Test
-  public void testZeroOrOneToOne() {
+  void zeroOrOneToOne() {
     Entity<TestUtil.FooEntity, ?> foo = new Entity<>(FOO, TestUtil.FooEntity.class);
     Entity<TestUtil.BarEntity, ?> bar = new Entity<>(BAR, TestUtil.BarEntity.class);
     Loader<TestUtil.BarEntity> l =
@@ -269,7 +270,7 @@ public final class LoaderTest {
   }
 
   @Test
-  public void testZeroOrOneToMany() {
+  void zeroOrOneToMany() {
     Entity<TestUtil.FooEntity, ?> foo = new Entity<>(FOO, TestUtil.FooEntity.class);
     Entity<TestUtil.BarEntity, ?> bar = new Entity<>(BAR, TestUtil.BarEntity.class);
     Loader<TestUtil.BarEntity> l =
@@ -302,7 +303,7 @@ public final class LoaderTest {
   }
 
   @Test
-  public void testZeroOrOneToManyRecursiveReference() {
+  void zeroOrOneToManyRecursiveReference() {
     Entity<TestUtil.BarEntity, ?> bar = new Entity<>(BAR, TestUtil.BarEntity.class);
     Loader<TestUtil.BarEntity> l =
         Loader.of(bar)
@@ -328,7 +329,7 @@ public final class LoaderTest {
   }
 
   @Test
-  public void testNToOneThrowsIfManyAreFound() {
+  void nToOneThrowsIfManyAreFound() {
     Entity<TestUtil.FooEntity, ?> foo = new Entity<>(FOO, TestUtil.FooEntity.class);
     Entity<TestUtil.BarEntity, ?> bar = new Entity<>(BAR, TestUtil.BarEntity.class);
     Loader<TestUtil.BarEntity> l =
@@ -354,7 +355,7 @@ public final class LoaderTest {
   }
 
   @Test
-  public void testManyToMany() {
+  void manyToMany() {
     Entity<TestUtil.FooEntity, ?> foo = new Entity<>(FOO, TestUtil.FooEntity.class);
     Entity<TestUtil.BarEntity, ?> bar = new Entity<>(BAR, TestUtil.BarEntity.class);
     Loader<TestUtil.FooEntity> l =
@@ -389,7 +390,7 @@ public final class LoaderTest {
   }
 
   @Test
-  public void testEmpty() {
+  void empty() {
     Entity<TestUtil.FooEntity, ?> foo = new Entity<>(FOO, TestUtil.FooEntity.class);
     Loader<TestUtil.FooEntity> l = Loader.of(foo).build();
 
@@ -399,7 +400,7 @@ public final class LoaderTest {
   }
 
   @Test
-  public void testRelationWithDummyRelationLoader() {
+  void relationWithDummyRelationLoader() {
     Entity<TestUtil.FooEntity, ?> foo = new Entity<>(FOO, TestUtil.FooEntity.class);
     Entity<TestUtil.BarEntity, ?> bar = new Entity<>(BAR, TestUtil.BarEntity.class);
 
@@ -431,7 +432,7 @@ public final class LoaderTest {
   }
 
   @Test
-  public void testRelationWithCustomRelationLoader() {
+  void relationWithCustomRelationLoader() {
     Entity<TestUtil.FooEntity, ?> foo = new Entity<>(FOO, TestUtil.FooEntity.class);
     Entity<TestUtil.BarEntity, ?> bar = new Entity<>(BAR, TestUtil.BarEntity.class);
 
@@ -483,7 +484,7 @@ public final class LoaderTest {
   }
 
   @Test
-  public void testFallbackToForeignKeyRelation() {
+  void fallbackToForeignKeyRelation() {
     Entity<TestUtil.FooEntity, ?> foo = new Entity<>(FOO, TestUtil.FooEntity.class);
     Entity<TestUtil.BarEntity, ?> bar = new Entity<>(BAR, TestUtil.BarEntity.class);
 
@@ -530,7 +531,7 @@ public final class LoaderTest {
   }
 
   @Test
-  public void testLoadTwice() {
+  void loadTwice() {
     Entity<TestUtil.FooEntity, ?> foo = new Entity<>(FOO, TestUtil.FooEntity.class);
     Loader<TestUtil.FooEntity> l = Loader.of(foo).build();
 
@@ -547,7 +548,7 @@ public final class LoaderTest {
   }
 
   @Test
-  public void testRightFoldingCombiner() {
+  void rightFoldingCombiner() {
     Entity<TestUtil.FooEntity, ?> foo = new Entity<>(FOO, TestUtil.FooEntity.class);
     Entity<TestUtil.BarEntity, ?> bar = new Entity<>(BAR, TestUtil.BarEntity.class);
     Loader<TestUtil.FooEntity> l =
@@ -656,7 +657,7 @@ public final class LoaderTest {
    * {@code a} must be equivalent to {@code combiner.apply(a, supplier.get())}.
    */
   @Test
-  public void testCollectorIdentity() {
+  void collectorIdentity() {
     Entity<TestUtil.FooEntity, ?> foo = new Entity<>(FOO, TestUtil.FooEntity.class);
     Entity<TestUtil.BarEntity, ?> bar = new Entity<>(BAR, TestUtil.BarEntity.class);
     Loader<TestUtil.BarEntity> l =
@@ -700,7 +701,7 @@ public final class LoaderTest {
    * }</pre>
    */
   @Test
-  public void testCombinerAssociativity() {
+  void combinerAssociativity() {
     Entity<TestUtil.FooEntity, ?> foo = new Entity<>(FOO, TestUtil.FooEntity.class);
     Entity<TestUtil.BarEntity, ?> bar = new Entity<>(BAR, TestUtil.BarEntity.class);
     Loader<TestUtil.BarEntity> l =
@@ -739,7 +740,7 @@ public final class LoaderTest {
    * finisher.apply(a1).equals(finisher.apply(a2))}.
    */
   @Test
-  public void testFinisherEquivalence() {
+  void finisherEquivalence() {
     Entity<TestUtil.FooEntity, ?> foo = new Entity<>(FOO, TestUtil.FooEntity.class);
     Entity<TestUtil.BarEntity, ?> bar = new Entity<>(BAR, TestUtil.BarEntity.class);
     Loader<TestUtil.BarEntity> l =
@@ -763,14 +764,14 @@ public final class LoaderTest {
   }
 
   @Test
-  public void testCollectorCharacteristics() {
+  void collectorCharacteristics() {
     Entity<TestUtil.BarEntity, ?> bar = new Entity<>(BAR, TestUtil.BarEntity.class);
     Loader<TestUtil.BarEntity> l = Loader.of(bar).build();
     assertIterableEquals(Set.of(), l.characteristics());
   }
 
   @Test
-  public void testCollector() {
+  void collector() {
     Field<?> v = DSL.field("v", Integer.class);
     Entity<TestUtil.FooEntity, ?> foo =
         new Entity<>(FOO, TestUtil.FooEntity.class).withExtraFields(v);
@@ -897,6 +898,6 @@ public final class LoaderTest {
     if (fooIds == null) {
       return Set.of();
     }
-    return Stream.of(fooIds).map(fooId -> new IdPair(fooId, barId)).collect(Collectors.toSet());
+    return Arrays.stream(fooIds).map(fooId -> new IdPair(fooId, barId)).collect(toSet());
   }
 }

@@ -10,9 +10,9 @@ import org.jooq.Field;
 import org.jooq.impl.DSL;
 import org.junit.jupiter.api.Test;
 
-public final class UtilTest {
+final class UtilTest {
   @Test
-  public void testEqualsOnFields() {
+  void equalsOnFields() {
     Field<Long> withSchema = DSL.field(DSL.name("BASE", "FOO", "ID"), Long.class);
     Field<Long> noSchema = DSL.field(DSL.name("FOO", "ID"), Long.class);
     assertTrue(FOO.ID.equals(withSchema));

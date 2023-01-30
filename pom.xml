@@ -769,8 +769,12 @@
                                     -Xep:AndroidJdkLibsChecker:OFF
                                     -Xep:Java7ApiChecker:OFF
                                     -Xep:Java8ApiChecker:OFF
+                                    -Xep:CollectorMutability:OFF
                                     -XepOpt:NullAway:AnnotatedPackages=io.github.ferdinandswoboda
                                     -XepOpt:NullAway:AssertsEnabled=true
+                                    -XepOpt:Refaster:NamePattern=^(?!(ImmutableMapRules.*))
+                                    -XepOpt:Refaster:NamePattern=^(?!(ImmutableSetRules.*))
+                                    -XepOpt:Refaster:NamePattern=^(?!(JUnitToAssertJRules.*))
                                     <!-- Append additional custom arguments.-->
                                     ${error-prone.args}
                                 </arg>

@@ -38,7 +38,7 @@ final class TestUtil {
   static Record createRecord(ImmutableMap<Field<?>, Object> values, Table<?>... nullTables) {
     Stream<Field<?>> tableFields =
         Stream.concat(
-                Stream.of(nullTables),
+                Arrays.stream(nullTables),
                 values.keySet().stream()
                     .filter(TableField.class::isInstance)
                     .map(f -> (TableField<?, ?>) f)

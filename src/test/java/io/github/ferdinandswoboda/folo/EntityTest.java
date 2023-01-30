@@ -12,19 +12,18 @@ import org.jooq.Record;
 import org.jooq.Record2;
 import org.jooq.Table;
 import org.jooq.impl.DSL;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public final class EntityTest {
+final class EntityTest {
   @Test
-  public void testGetters() {
+  void getters() {
     Entity<TestUtil.FooEntity, FooRecord> aEntity = new Entity<>(FOO, TestUtil.FooEntity.class);
     assertEquals(FOO.ID, aEntity.getPrimaryKey());
     assertEquals(FOO, aEntity.getTable());
   }
 
   @Test
-  public void testGettersAliased() {
+  void gettersAliased() {
     Table<?> bar = FOO.as("BAR");
     Entity<TestUtil.FooEntity, ?> aEntity = new Entity<>(bar, TestUtil.FooEntity.class);
     assertEquals(bar.field(FOO.ID), aEntity.getPrimaryKey());
@@ -32,16 +31,16 @@ public final class EntityTest {
   }
 
   @Test
-  public void testLoad() {
+  void load() {
     Entity<TestUtil.FooEntity, FooRecord> aEntity = new Entity<>(FOO, TestUtil.FooEntity.class);
     @SuppressWarnings("NullAway")
     var fooRecord = new FooRecord(1L, 1, null);
     TestUtil.FooEntity object = aEntity.load(fooRecord);
-    Assertions.assertEquals(new TestUtil.FooEntity(1L, 1, null), object);
+    assertEquals(new TestUtil.FooEntity(1L, 1, null), object);
   }
 
   @Test
-  public void testLoadExtraAttributes() {
+  void loadExtraAttributes() {
     Field<?> v = DSL.field("v", Integer.class);
     Entity<TestUtil.FooEntity, FooRecord> aEntity =
         new Entity<>(FOO, TestUtil.FooEntity.class).withExtraFields(v);
@@ -49,11 +48,11 @@ public final class EntityTest {
         TestUtil.createRecord(
             ImmutableMap.of(FOO.ID, 1L, FOO.FOO_, 1, FOO.RELATEDFOOIDS, new Long[0], v, 2));
     TestUtil.FooEntity object = aEntity.load(record);
-    Assertions.assertEquals(new TestUtil.FooEntity(1L, 1, new Long[0], 2), object);
+    assertEquals(new TestUtil.FooEntity(1L, 1, new Long[0], 2), object);
   }
 
   @Test
-  public void testLoadAdHocTable() {
+  void loadAdHocTable() {
     Field<Long> id = DSL.field("id", Long.class);
     Field<Integer> foo = DSL.field("foo", Integer.class);
     Table<Record2<Long, Integer>> adHoc = DSL.select(id, foo).asTable("AdHoc");
@@ -62,11 +61,11 @@ public final class EntityTest {
     Record record =
         TestUtil.createRecord(ImmutableMap.of(adHoc.field(id), 1L, adHoc.field(foo), 1));
     TestUtil.FooEntity object = aEntity.load(record);
-    Assertions.assertEquals(new TestUtil.FooEntity(1L, 1, null), object);
+    assertEquals(new TestUtil.FooEntity(1L, 1, null), object);
   }
 
   @Test
-  public void testLoadWrongTable() {
+  void loadWrongTable() {
     Foo bar = FOO.as("BAR");
     Entity<TestUtil.FooEntity, FooRecord> aEntity = new Entity<>(FOO, TestUtil.FooEntity.class);
     Record record = TestUtil.createRecord(ImmutableMap.of(bar.ID, 1L, bar.FOO_, 1));
