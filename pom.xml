@@ -62,6 +62,7 @@
         <revision>LOCAL-SNAPSHOT</revision>
         <version.auto-service>1.0.1</version.auto-service>
         <version.error-prone>2.15.0</version.error-prone>
+        <version.error-prone-support>0.8.0</version.error-prone-support>
         <version.guava>31.1-jre</version.guava>
         <version.guava-beta-checker>1.0</version.guava-beta-checker>
         <version.jdk>17</version.jdk>
@@ -733,6 +734,16 @@
                                     <groupId>org.mockito</groupId>
                                     <artifactId>mockito-errorprone</artifactId>
                                     <version>${version.mockito}</version>
+                                </path>
+                                <path>
+                                    <groupId>tech.picnic.error-prone-support</groupId>
+                                    <artifactId>error-prone-contrib</artifactId>
+                                    <version>${version.error-prone-support}</version>
+                                </path>
+                                <path>
+                                    <groupId>tech.picnic.error-prone-support</groupId>
+                                    <artifactId>refaster-runner</artifactId>
+                                    <version>${version.error-prone-support}</version>
                                 </path>
                             </annotationProcessorPaths>
                             <compilerArgs combine.children="append">
