@@ -13,8 +13,8 @@ import org.jooq.UniqueKey;
 final class Util {
   private Util() {}
 
-  static <R extends Record> TableField<R, Long> getPrimaryKey(Table<R> table) {
-    return getKey(table, table.getPrimaryKey().getFields(), "primary");
+  static <R extends Record> TableField<R, UniqueKey<R>> getPrimaryKey(Table<? extends R> table) {
+    return table.getPrimaryKey();
   }
 
   static <L extends Record, R extends Record> TableField<?, Long> getForeignKey(
@@ -51,15 +51,13 @@ final class Util {
   }
 
   private static <R extends Record> TableField<R, Long> getKey(
-      Table<R> table, List<TableField<R, ?>> fields, String keyType) {
+          Table<? extends R> table, List<? extends TableField<? extends R, Long>> fields, String keyType) {
     validate(fields.size() == 1, "Compound %s keys are not supported", keyType);
     validate(
         Long.class.equals(fields.get(0).getType()),
         "Only %s keys of type Long are supported",
         keyType);
-    @SuppressWarnings("unchecked")
-    var field = (TableField<R, Long>) table.field(fields.get(0));
-    return field;
+      return (TableField<R, Long>) table.field(fields.get(0));
   }
 
   private static <R extends Record> Table<R> unalias(Table<R> table) {

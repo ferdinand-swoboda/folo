@@ -9,6 +9,7 @@ import org.jetbrains.annotations.Nullable;
 import org.jooq.Field;
 import org.jooq.Record;
 import org.jooq.Table;
+import org.jooq.UniqueKey;
 
 /**
  * Represents a mapping from a {@link Table table} to a {@link Class class}. This class is used to
@@ -16,6 +17,7 @@ import org.jooq.Table;
  *
  * @param <T> The class that is mapped to.
  */
+// todo Extract interface and prefer (package-)private constructor with static factory method over final
 public final class Entity<T, R extends Record> {
   private final Table<R> table;
   private final Field<Long> primaryKey;
@@ -31,7 +33,7 @@ public final class Entity<T, R extends Record> {
    *     supported.
    * @param type The class that the table for this primary key is mapped to.
    */
-  public Entity(Table<R> table, Class<T> type) {
+  public Entity(Table<? extends R> table, Class<T> type) {
     this(table, type, Util.getPrimaryKey(table));
   }
 
@@ -45,7 +47,7 @@ public final class Entity<T, R extends Record> {
    * @param type The class that the table for this primary key is mapped to.
    * @param primaryKey The field to use as a primary key
    */
-  public Entity(Table<R> table, Class<T> type, Field<Long> primaryKey) {
+  public Entity(Table<R> table, Class<T> type, UniqueKey<R> primaryKey) {
     this(table, type, primaryKey, table.fields());
   }
 
