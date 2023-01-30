@@ -212,9 +212,9 @@
         <pluginManagement>
             <plugins>
                 <plugin>
-                    <groupId>com.coveo</groupId>
+                    <groupId>com.spotify.fmt</groupId>
                     <artifactId>fmt-maven-plugin</artifactId>
-                    <version>2.13</version>
+                    <version>2.18</version>
                 </plugin>
                 <plugin>
                     <groupId>com.github.ekryd.sortpom</groupId>
@@ -679,16 +679,8 @@
             <build>
                 <plugins>
                     <plugin>
-                        <groupId>com.coveo</groupId>
+                        <groupId>com.spotify.fmt</groupId>
                         <artifactId>fmt-maven-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>check-source-format</id>
-                                <goals>
-                                    <goal>check</goal>
-                                </goals>
-                            </execution>
-                        </executions>
                     </plugin>
                     <plugin>
                         <groupId>com.github.ekryd.sortpom</groupId>
