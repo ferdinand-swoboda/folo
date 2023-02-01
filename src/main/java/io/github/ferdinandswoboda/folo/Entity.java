@@ -1,6 +1,7 @@
 package io.github.ferdinandswoboda.folo;
 
 import static java.util.Arrays.stream;
+import static java.util.Objects.requireNonNull;
 import static java.util.stream.Stream.concat;
 
 import java.util.Objects;
@@ -51,10 +52,10 @@ public final class Entity<T, R extends Record> {
 
   /** Copy constructor (for internal use). */
   private Entity(Table<R> table, Class<T> type, Field<Long> primaryKey, Field<?>[] fields) {
-    Objects.requireNonNull(table);
-    Objects.requireNonNull(primaryKey);
-    Objects.requireNonNull(type);
-    Objects.requireNonNull(fields);
+    requireNonNull(table);
+    requireNonNull(primaryKey);
+    requireNonNull(type);
+    requireNonNull(fields);
     this.table = table;
     this.primaryKey = primaryKey;
     this.type = type;
@@ -111,7 +112,7 @@ public final class Entity<T, R extends Record> {
      * instead of FOO.X.
      */
     @Nullable T result = record.into(resultFields).into(type);
-    Objects.requireNonNull(result);
+    requireNonNull(result);
     return result;
   }
 

@@ -1,10 +1,10 @@
 package io.github.ferdinandswoboda.folo;
 
 import static java.util.Collections.emptySet;
+import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Set;
 import java.util.function.BiConsumer;
 import java.util.function.BinaryOperator;
@@ -58,7 +58,7 @@ public final class Loader<T> implements Collector<Record, ObjectGraph, List<T>> 
    * @return The initial builder stage.
    */
   public static <T> LoaderBuilder<T> of(Entity<T, ?> mainEntity) {
-    Objects.requireNonNull(mainEntity);
+    requireNonNull(mainEntity);
     return new LoaderBuilderImpl<>(mainEntity);
   }
 
@@ -104,8 +104,8 @@ public final class Loader<T> implements Collector<Record, ObjectGraph, List<T>> 
     };
   }
 
-  @SuppressWarnings({"unchecked", "rawtypes", "NoFunctionalReturnType"})
   @Override
+  @SuppressWarnings({"NoFunctionalReturnType", "rawtypes", "unchecked"})
   public Function<ObjectGraph, List<T>> finisher() {
     return objectGraph -> {
       for (Relation relation : relations) {

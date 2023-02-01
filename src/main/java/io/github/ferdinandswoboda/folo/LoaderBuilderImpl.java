@@ -1,10 +1,11 @@
 package io.github.ferdinandswoboda.folo;
 
+import static java.util.Objects.requireNonNull;
+
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Objects;
 import java.util.Set;
 import org.jooq.Record;
 import org.jooq.Table;
@@ -41,8 +42,8 @@ final class LoaderBuilderImpl<T> implements LoaderBuilder<T> {
    */
   @Override
   public <L, R> RelationBuilder<T, L, R> relation(Entity<L, ?> left, Entity<R, ?> right) {
-    Objects.requireNonNull(left);
-    Objects.requireNonNull(right);
+    requireNonNull(left);
+    requireNonNull(right);
     addEntity(left);
     addEntity(right);
     return new RelationBuilder<>(this, left, right);
@@ -51,16 +52,16 @@ final class LoaderBuilderImpl<T> implements LoaderBuilder<T> {
   @Override
   public <L, R, L2 extends Record, R2 extends Record> RelationBuilder<T, L, R> oneToMany(
       Entity<L, L2> left, Entity<R, R2> right) {
-    Objects.requireNonNull(left);
-    Objects.requireNonNull(right);
+    requireNonNull(left);
+    requireNonNull(right);
     return relation(left, right).oneToMany(Util.getForeignKey(right.getTable(), left.getTable()));
   }
 
   @Override
   public <L, R, L2 extends Record, R2 extends Record> RelationBuilder<T, L, R> oneToOne(
       Entity<L, L2> left, Entity<R, R2> right) {
-    Objects.requireNonNull(left);
-    Objects.requireNonNull(right);
+    requireNonNull(left);
+    requireNonNull(right);
     return relation(left, right)
         .oneToOne(getForeignKeySymmetric(left.getTable(), right.getTable()));
   }
@@ -68,8 +69,8 @@ final class LoaderBuilderImpl<T> implements LoaderBuilder<T> {
   @Override
   public <L, R, L2 extends Record, R2 extends Record> RelationBuilder<T, L, R> oneToZeroOrOne(
       Entity<L, L2> left, Entity<R, R2> right) {
-    Objects.requireNonNull(left);
-    Objects.requireNonNull(right);
+    requireNonNull(left);
+    requireNonNull(right);
     return relation(left, right)
         .oneToZeroOrOne(getForeignKeySymmetric(left.getTable(), right.getTable()));
   }
@@ -77,8 +78,8 @@ final class LoaderBuilderImpl<T> implements LoaderBuilder<T> {
   @Override
   public <L, R, L2 extends Record, R2 extends Record> RelationBuilder<T, L, R> optionalOneToOne(
       Entity<L, L2> left, Entity<R, R2> right) {
-    Objects.requireNonNull(left);
-    Objects.requireNonNull(right);
+    requireNonNull(left);
+    requireNonNull(right);
     return relation(left, right)
         .optionalOneToOne(getForeignKeySymmetric(left.getTable(), right.getTable()));
   }
@@ -86,8 +87,8 @@ final class LoaderBuilderImpl<T> implements LoaderBuilder<T> {
   @Override
   public <L, R, L2 extends Record, R2 extends Record> RelationBuilder<T, L, R> zeroOrOneToMany(
       Entity<L, L2> left, Entity<R, R2> right) {
-    Objects.requireNonNull(left);
-    Objects.requireNonNull(right);
+    requireNonNull(left);
+    requireNonNull(right);
     return relation(left, right)
         .zeroOrOneToMany(Util.getForeignKey(right.getTable(), left.getTable()));
   }
@@ -95,9 +96,9 @@ final class LoaderBuilderImpl<T> implements LoaderBuilder<T> {
   @Override
   public <L, R, L2 extends Record, R2 extends Record> RelationBuilder<T, L, R> manyToMany(
       Entity<L, L2> left, Entity<R, R2> right, Table<?> relation) {
-    Objects.requireNonNull(left);
-    Objects.requireNonNull(right);
-    Objects.requireNonNull(relation);
+    requireNonNull(left);
+    requireNonNull(right);
+    requireNonNull(relation);
     TableField<?, Long> leftKey = Util.getForeignKey(relation, left.getTable());
     TableField<?, Long> rightKey = Util.getForeignKey(relation, right.getTable());
     return relation(left, right).manyToMany(leftKey, rightKey);

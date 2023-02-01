@@ -57,10 +57,12 @@
         <!-- Property using which additional Error Prone flags can be
         specified. Used by the `patch` profile to enable patching. -->
         <error-prone.args/>
+        <project.build.outputTimestamp>${git.commit.time}</project.build.outputTimestamp>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <revision>LOCAL-SNAPSHOT</revision>
         <version.auto-service>1.0.1</version.auto-service>
-        <version.error-prone>2.15.0</version.error-prone>
+        <version.error-prone>2.18.0</version.error-prone>
+        <version.error-prone-support>0.8.0</version.error-prone-support>
         <version.guava>31.1-jre</version.guava>
         <version.guava-beta-checker>1.0</version.guava-beta-checker>
         <version.jdk>17</version.jdk>
@@ -212,11 +214,6 @@
         <pluginManagement>
             <plugins>
                 <plugin>
-                    <groupId>com.coveo</groupId>
-                    <artifactId>fmt-maven-plugin</artifactId>
-                    <version>2.13</version>
-                </plugin>
-                <plugin>
                     <groupId>com.github.ekryd.sortpom</groupId>
                     <artifactId>sortpom-maven-plugin</artifactId>
                     <version>3.2.0</version>
@@ -241,6 +238,16 @@
                             <phase>verify</phase>
                         </execution>
                     </executions>
+                </plugin>
+                <plugin>
+                    <groupId>com.spotify.fmt</groupId>
+                    <artifactId>fmt-maven-plugin</artifactId>
+                    <version>2.18</version>
+                </plugin>
+                <plugin>
+                    <groupId>io.github.git-commit-id</groupId>
+                    <artifactId>git-commit-id-maven-plugin</artifactId>
+                    <version>5.0.0</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -596,6 +603,10 @@
         </pluginManagement>
         <plugins>
             <plugin>
+                <groupId>io.github.git-commit-id</groupId>
+                <artifactId>git-commit-id-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
             </plugin>
@@ -621,6 +632,10 @@
                         </configuration>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>tidy-maven-plugin</artifactId>
             </plugin>
             <plugin>
                 <groupId>org.jooq</groupId>
@@ -679,20 +694,12 @@
             <build>
                 <plugins>
                     <plugin>
-                        <groupId>com.coveo</groupId>
-                        <artifactId>fmt-maven-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>check-source-format</id>
-                                <goals>
-                                    <goal>check</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <plugin>
                         <groupId>com.github.ekryd.sortpom</groupId>
                         <artifactId>sortpom-maven-plugin</artifactId>
+                    </plugin>
+                    <plugin>
+                        <groupId>com.spotify.fmt</groupId>
+                        <artifactId>fmt-maven-plugin</artifactId>
                     </plugin>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
@@ -728,6 +735,16 @@
                                     <artifactId>mockito-errorprone</artifactId>
                                     <version>${version.mockito}</version>
                                 </path>
+                                <path>
+                                    <groupId>tech.picnic.error-prone-support</groupId>
+                                    <artifactId>error-prone-contrib</artifactId>
+                                    <version>${version.error-prone-support}</version>
+                                </path>
+                                <path>
+                                    <groupId>tech.picnic.error-prone-support</groupId>
+                                    <artifactId>refaster-runner</artifactId>
+                                    <version>${version.error-prone-support}</version>
+                                </path>
                             </annotationProcessorPaths>
                             <compilerArgs combine.children="append">
                                 <!-- We enable nearly all doclint checks,
@@ -752,8 +769,12 @@
                                     -Xep:AndroidJdkLibsChecker:OFF
                                     -Xep:Java7ApiChecker:OFF
                                     -Xep:Java8ApiChecker:OFF
+                                    -Xep:CollectorMutability:OFF
                                     -XepOpt:NullAway:AnnotatedPackages=io.github.ferdinandswoboda
                                     -XepOpt:NullAway:AssertsEnabled=true
+                                    -XepOpt:Refaster:NamePattern=^(?!(ImmutableMapRules.*))
+                                    -XepOpt:Refaster:NamePattern=^(?!(ImmutableSetRules.*))
+                                    -XepOpt:Refaster:NamePattern=^(?!(JUnitToAssertJRules.*))
                                     <!-- Append additional custom arguments.-->
                                     ${error-prone.args}
                                 </arg>

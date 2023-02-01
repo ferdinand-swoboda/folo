@@ -13,5 +13,5 @@ import java.util.Map;
  * @param toPredecessors A reverse map of all {@link R} objects to their related {@link L} objects.
  */
 // XXX: Workaround for https://github.com/google/error-prone/issues/2321
-@SuppressWarnings({"InvalidParam", "ImmutableMemberCollection"})
+@SuppressWarnings({"ImmutableMemberCollection", "InvalidParam"})
 record ObjectMapping<L, R>(Map<L, List<R>> toSuccessors, Map<R, List<L>> toPredecessors) {}

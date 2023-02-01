@@ -142,8 +142,7 @@ final class Relation<L, R> {
               leftArity,
               right,
               rightArity);
-          setter.accept(
-              object, successors.isEmpty() ? Optional.empty() : Optional.of(successors.get(0)));
+          setter.accept(object, successors.stream().findFirst());
         });
   }
 
