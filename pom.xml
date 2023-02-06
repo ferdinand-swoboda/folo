@@ -43,16 +43,6 @@
         <system>Github CI</system>
         <url>https://github.com/ferdinand-swoboda/folo</url>
     </ciManagement>
-    <distributionManagement>
-        <repository>
-            <id>ossrh</id>
-            <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-        </repository>
-        <snapshotRepository>
-            <id>ossrh</id>
-            <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
-        </snapshotRepository>
-    </distributionManagement>
 
     <properties>
         <!-- Property using which additional Error Prone flags can be
@@ -349,7 +339,17 @@
                     <configuration>
                         <fail>false</fail>
                         <rules>
+                            <banDependencyManagementScope/>
+                            <banDistributionManagement/>
                             <banDuplicatePomDependencyVersions/>
+                            <banCircularDependencies/>
+                            <requireEncoding/>
+                            <banDuplicateClasses/>
+                            <enforceBytecodeVersion>
+                                <maxJdkVersion>${version.jdk}</maxJdkVersion>
+                            </enforceBytecodeVersion>
+                            <!-- Enable once https://issues.apache.org/jira/browse/MENFORCER-467 is resolved.
+                             <banDynamicVersions />-->
                             <dependencyConvergence/>
                             <requireJavaVersion>
                                 <version>${version.jdk}</version>
@@ -358,6 +358,9 @@
                             <!-- <requireMavenVersion>-->
                             <!--     <version>${version.maven}</version>-->
                             <!-- </requireMavenVersion>-->
+                            <reactorModuleConvergence/>
+                            <requirePluginVersions/>
+                            <requireReleaseDeps/>
                             <requirePluginVersions/>
                             <requireSameVersions/>
                             <requireUpperBoundDeps/>
