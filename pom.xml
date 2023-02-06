@@ -571,15 +571,19 @@
                 <plugin>
                     <groupId>org.pitest</groupId>
                     <artifactId>pitest-maven</artifactId>
-                    <version>1.9.5</version>
+                    <version>1.11.0</version>
                     <configuration>
+                        <features>
+                            <feature>+auto_threads</feature>
+                        </features>
                         <mutators>
                             <mutator>ALL</mutator>
                         </mutators>
+                        <mutationThreshold>100</mutationThreshold>
+                        <coverageThreshold>95</coverageThreshold>
                         <!-- Use multple threads to speed things up. Extend
                         timeouts to prevent false positives as a result of
                         contention. -->
-                        <threads>4</threads>
                         <timeoutFactor>4</timeoutFactor>
                         <timestampedReports>false</timestampedReports>
                     </configuration>
@@ -590,14 +594,6 @@
                             <version>1.1.2</version>
                         </dependency>
                     </dependencies>
-                    <executions>
-                        <execution>
-                            <id>compute-mutation-coverage</id>
-                            <goals>
-                                <goal>mutationCoverage</goal>
-                            </goals>
-                        </execution>
-                    </executions>
                 </plugin>
             </plugins>
         </pluginManagement>
