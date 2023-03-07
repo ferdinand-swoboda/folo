@@ -1,9 +1,8 @@
-module folo {
+module io.github.ferdinandswoboda.folo {
   requires java.compiler;
   requires transitive org.jooq;
-  requires static jsr305;
   requires static com.google.errorprone.annotations;
-  requires static org.immutables.value.annotations;
+  requires static org.jetbrains.annotations;
 
   exports io.github.ferdinandswoboda.folo;
 
