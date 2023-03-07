@@ -132,11 +132,8 @@ dependencies {
 
 - Make use of Java modules (introduced in Java 9).
 - Only primary / foreign keys of (Java) type `long` are supported i.e. no composite or UUID keys.
-- Make Maven builds reproducible ([guide](https://maven.apache.org/guides/mini/guide-reproducible-builds.html))
-- Switch to Spotify's fmt-maven-plugin fork
 - Investigate nullness annotations (e.g. `javax.annotations`, `org.jspecify`).
 - Investigate `@Contract` annotations (`org.jetbrains`).
-- Adopt [Error Prone Support](https://github.com/PicnicSupermarket/error-prone-support)
 - Relation mapping does not work for entities that are not based on a table in the DB schema.
 
 ## Contributing
