@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        jdk: [ 17 ]
+        jdk: [ 21 ]
     steps:
       - name: Check out code
         uses: actions/checkout@v4
@@ -31,7 +31,7 @@ jobs:
       - name: Set up Maven Central Repository
         uses: actions/setup-java@v4
         with:
-          java-version: '17'
+          java-version: '21'
           distribution: 'temurin'
           server-id: ossrh
           server-username: MAVEN_USERNAME

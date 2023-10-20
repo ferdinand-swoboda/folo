@@ -64,7 +64,7 @@ public final class Entity<T, R extends Record> {
 
   @Override
   public String toString() {
-    return String.format("Entity<%s, %s>", type.getSimpleName(), primaryKey);
+    return "Entity<%s, %s>".formatted(type.getSimpleName(), primaryKey);
   }
 
   /**
