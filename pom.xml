@@ -78,7 +78,6 @@
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
                 <version>${version.guava}</version>
-                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>javax.annotation</groupId>
@@ -137,13 +136,11 @@
                 <artifactId>mockito-bom</artifactId>
                 <version>${version.mockito}</version>
                 <type>pom</type>
-                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>org.postgresql</groupId>
                 <artifactId>postgresql</artifactId>
                 <version>${version.postgresql}</version>
-                <scope>test</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -341,16 +338,23 @@
                         <rules>
                             <banDependencyManagementScope/>
                             <banDistributionManagement/>
-                            <banDuplicatePomDependencyVersions/>
-                            <banCircularDependencies/>
-                            <requireEncoding/>
                             <banDuplicateClasses/>
+                            <banDuplicatePomDependencyVersions/>
+                            <banDynamicVersions/>
+                            <banCircularDependencies/>
+                            <banTransitiveDependencies>
+                                <excludes>
+                                    <exclude>org.jooq:jooq</exclude>
+                                </excludes>
+                            </banTransitiveDependencies>
+                            <dependencyConvergence/>
+                            <reactorModuleConvergence/>
+                            <requireNoRepositories/>
+                            <!-- Enable once all files have been converted to UTF-8-->
+                            <!-- <requireEncoding/>-->
                             <enforceBytecodeVersion>
                                 <maxJdkVersion>${version.jdk}</maxJdkVersion>
                             </enforceBytecodeVersion>
-                            <!-- Enable once https://issues.apache.org/jira/browse/MENFORCER-467 is resolved.
-                             <banDynamicVersions />-->
-                            <dependencyConvergence/>
                             <requireJavaVersion>
                                 <version>${version.jdk}</version>
                             </requireJavaVersion>
@@ -358,7 +362,6 @@
                             <!-- <requireMavenVersion>-->
                             <!--     <version>${version.maven}</version>-->
                             <!-- </requireMavenVersion>-->
-                            <reactorModuleConvergence/>
                             <requirePluginVersions/>
                             <requireReleaseDeps/>
                             <requirePluginVersions/>
