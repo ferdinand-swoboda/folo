@@ -80,11 +80,6 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>com.google.auto.service</groupId>
-                <artifactId>auto-service-annotations</artifactId>
-                <version>${version.auto-service}</version>
-            </dependency>
-            <dependency>
                 <groupId>com.google.errorprone</groupId>
                 <artifactId>error_prone_annotations</artifactId>
                 <version>${version.error-prone}</version>
@@ -306,11 +301,6 @@
                                 <groupId>org.openjdk.jmh</groupId>
                                 <artifactId>jmh-generator-annprocess</artifactId>
                                 <version>${version.jmh}</version>
-                            </path>
-                            <path>
-                                <groupId>com.google.auto.service</groupId>
-                                <artifactId>auto-service</artifactId>
-                                <version>${version.auto-service}</version>
                             </path>
                         </annotationProcessorPaths>
                         <parameters>true</parameters>
