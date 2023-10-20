@@ -60,14 +60,14 @@ final class Relation<L, R> {
 
   @Override
   public String toString() {
-    return String.format(
-        "%s-to-%s Relation<%s (%s), %s (%s)>",
-        leftArity,
-        rightArity,
-        left.getTable().getName(),
-        leftKey.getName(),
-        right.getTable().getName(),
-        rightKey.getName());
+    return "%s-to-%s Relation<%s (%s), %s (%s)>"
+        .formatted(
+            leftArity,
+            rightArity,
+            left.getTable().getName(),
+            leftKey.getName(),
+            right.getTable().getName(),
+            rightKey.getName());
   }
 
   @SuppressWarnings("NoFunctionalReturnType")
@@ -92,15 +92,9 @@ final class Relation<L, R> {
   @SuppressWarnings({"rawtypes", "unchecked"})
   private <T, U> void link(BiConsumer setter, Map<T, List<U>> objectMapping, Arity arity) {
     switch (arity) {
-      case MANY:
-        linkMany(objectMapping, setter);
-        break;
-      case ONE:
-        linkOne(objectMapping, setter);
-        break;
-      case ZERO_OR_ONE:
-        linkOptional(objectMapping, setter);
-        break;
+      case MANY -> linkMany(objectMapping, setter);
+      case ONE -> linkOne(objectMapping, setter);
+      case ZERO_OR_ONE -> linkOptional(objectMapping, setter);
     }
   }
 
@@ -109,18 +103,22 @@ final class Relation<L, R> {
         (object, successors) -> {
           validate(
               successors.size() <= 1,
-              "N-to-1 relation between %s (%s) and %s (%s) contains conflicting tuples. "
-                  + "Encountered more than one entity candidate for a given entity on the left side. "
-                  + "Please verify that the query result's rows abide by the loader definition.",
+              """
+                  N-to-1 relation between %s (%s) and %s (%s) contains conflicting tuples.
+                  Encountered more than one entity candidate for a given entity on the left side.
+                  Please verify that the query result's rows abide by the loader definition.
+                  """,
               left,
               leftArity,
               right,
               rightArity);
           validate(
               !successors.isEmpty(),
-              "N-to-1 relation between %s (%s) and %s (%s) contains conflicting tuples. "
-                  + "Encountered no entity candidate for a given entity on the left side. "
-                  + "Please verify that the query result's rows abide by the loader definition.",
+              """
+                  N-to-1 relation between %s (%s) and %s (%s) contains conflicting tuples.
+                  Encountered no entity candidate for a given entity on the left side.
+                  Please verify that the query result's rows abide by the loader definition.
+                  """,
               left,
               leftArity,
               right,
@@ -135,9 +133,11 @@ final class Relation<L, R> {
         (object, successors) -> {
           validate(
               successors.size() <= 1,
-              "N-to-0..1 relation between %s (%s) and %s (%s) contains conflicting tuples. "
-                  + "Encountered more than one entity candidate for a given entity on the left side. "
-                  + "Please verify that the query result's rows abide by the loader definition.",
+              """
+                  N-to-0..1 relation between %s (%s) and %s (%s) contains conflicting tuples.
+                  Encountered more than one entity candidate for a given entity on the left side.
+                  Please verify that the query result's rows abide by the loader definition.
+                  """,
               left,
               leftArity,
               right,
