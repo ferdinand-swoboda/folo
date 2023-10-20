@@ -252,7 +252,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-checkstyle-plugin</artifactId>
-                    <version>3.2.0</version>
+                    <version>3.2.2</version>
                     <configuration>
                         <!-- The plugin's "excludes" property accepts an Ant
                         pattern, but does not match against the full path. So
