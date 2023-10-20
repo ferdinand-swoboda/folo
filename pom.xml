@@ -61,7 +61,7 @@
         <project.build.outputTimestamp>${git.commit.time}</project.build.outputTimestamp>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <revision>LOCAL-SNAPSHOT</revision>
-        <version.auto-service>1.0.1</version.auto-service>
+        <version.auto-service>1.1.1</version.auto-service>
         <version.error-prone>2.18.0</version.error-prone>
         <version.error-prone-support>0.8.0</version.error-prone-support>
         <version.guava>32.0.0-jre</version.guava>
