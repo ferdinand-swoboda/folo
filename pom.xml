@@ -354,7 +354,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-enforcer-plugin</artifactId>
-                    <version>3.1.0</version>
+                    <version>3.3.0</version>
                     <configuration>
                         <fail>false</fail>
                         <rules>
@@ -367,7 +367,7 @@
                                 <version>${version.maven}</version>
                             </requireMavenVersion>
                             <requirePluginVersions/>
-                            <requireSameVersionsReactor/>
+                            <requireSameVersions/>
                             <requireUpperBoundDeps/>
                         </rules>
                     </configuration>
