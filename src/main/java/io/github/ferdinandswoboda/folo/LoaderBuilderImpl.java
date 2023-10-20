@@ -6,6 +6,7 @@ import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import org.jooq.Record;
 import org.jooq.Table;
@@ -104,21 +105,17 @@ final class LoaderBuilderImpl<T> implements LoaderBuilder<T> {
     return relation(left, right).manyToMany(leftKey, rightKey);
   }
 
-  @SuppressWarnings("NullAway")
   private static <L extends Record, R extends Record> TableField<?, Long> getForeignKeySymmetric(
       Table<L> left, Table<R> right) {
-    TableField<?, Long> leftKey = Util.getOptionalForeignKey(right, left).orElse(null);
-    TableField<?, Long> rightKey =
-        leftKey == null
-            ? Util.getForeignKey(left, right)
-            : Util.getOptionalForeignKey(left, right).orElse(null);
+    Optional<TableField<?, Long>> leftKey = Util.getOptionalForeignKey(right, left);
+    Optional<TableField<?, Long>> rightKey = Util.getOptionalForeignKey(left, right);
     Util.validate(
-        leftKey == null || rightKey == null || leftKey.equals(rightKey),
+        leftKey.isEmpty() || rightKey.isEmpty() || leftKey.equals(rightKey),
         "One-to-one relationship between %s and %s is ambiguous, "
             + "please specify the foreign key explicitly",
         left.getName(),
         right.getName());
-    return leftKey == null ? rightKey : leftKey;
+    return leftKey.or(() -> rightKey).orElseThrow(IllegalStateException::new);
   }
 
   /**
