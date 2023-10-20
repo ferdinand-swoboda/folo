@@ -65,6 +65,7 @@ final class TestUtil {
     @Nullable private Object[] relatedFooIds;
     @Nullable private Integer v;
     @Nullable private ImmutableList<BarEntity> barList;
+    @SuppressWarnings("NullableOptional")
     @Nullable private Optional<BarEntity> barOptional;
 
     FooEntity(long id, int foo) {
@@ -173,8 +174,10 @@ final class TestUtil {
     @Nullable private final Long bazId;
 
     @Nullable private FooEntity foo;
+    @SuppressWarnings("NullableOptional")
     @Nullable private Optional<FooEntity> fooOptional;
     @Nullable private ImmutableList<FooEntity> fooList;
+    @SuppressWarnings("NullableOptional")
     @Nullable private Optional<BarEntity> otherBar;
 
     BarEntity(

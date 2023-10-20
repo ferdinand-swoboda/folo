@@ -11,6 +11,8 @@ import java.util.function.BinaryOperator;
 import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collector;
+
+import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import org.jooq.Record;
 
 /**
@@ -70,6 +72,7 @@ public final class Loader<T> implements Collector<Record, ObjectGraph, List<T>> 
    * @param loader The given loader to be returned.
    * @return The given loader.
    */
+  @CanIgnoreReturnValue
   public static <T> Loader<T> toLinkedObjectsWith(Loader<T> loader) {
     return loader;
   }
