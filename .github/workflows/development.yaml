@@ -46,7 +46,7 @@ jobs:
           MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
       - run: mkdir staging && cp target/*.jar staging
       - name: Upload artifact sources
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
          name: Sources
          path: staging
