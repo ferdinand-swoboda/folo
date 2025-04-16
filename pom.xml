@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>io.github.ferdinand-swoboda.folo</groupId>
@@ -443,9 +442,7 @@
                         code, so we must take care to exclude it during the
                         Javadoc generation process. Flag this issue with jOOQ
                         to get it resolved. -->
-                        <sourcepath>
-                            ${project.basedir}/src/main/java:${project.build.directory}/generated-sources/annotations
-                        </sourcepath>
+                        <sourcepath>${project.basedir}/src/main/java:${project.build.directory}/generated-sources/annotations</sourcepath>
                     </configuration>
                     <executions>
                         <execution>
@@ -590,11 +587,6 @@
                         </mutators>
                         <mutationThreshold>100</mutationThreshold>
                         <coverageThreshold>95</coverageThreshold>
-                        <!-- Use multple threads to speed things up. Extend
-                        timeouts to prevent false positives as a result of
-                        contention. -->
-                        <timeoutFactor>4</timeoutFactor>
-                        <timestampedReports>false</timestampedReports>
                     </configuration>
                     <dependencies>
                         <dependency>
@@ -684,6 +676,22 @@
             </plugin>
         </plugins>
     </build>
+
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.pitest</groupId>
+                <artifactId>pitest-maven</artifactId>
+                <reportSets>
+                    <reportSet>
+                        <reports>
+                            <report>report</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
+            </plugin>
+        </plugins>
+    </reporting>
 
     <profiles>
         <profile>
@@ -837,8 +845,7 @@
                 </property>
             </activation>
             <properties>
-                <error-prone.args>-XepPatchChecks:${errorprone.patchchecks} -XepPatchLocation:IN_PLACE
-                </error-prone.args>
+                <error-prone.args>-XepPatchChecks:${errorprone.patchchecks} -XepPatchLocation:IN_PLACE</error-prone.args>
             </properties>
         </profile>
         <profile>
