@@ -544,7 +544,7 @@
                             <goals>
                                 <goal>modernizer</goal>
                             </goals>
-                            <phase>process-test-classes</phase>
+                            <phase>verify</phase>
                         </execution>
                     </executions>
                 </plugin>
