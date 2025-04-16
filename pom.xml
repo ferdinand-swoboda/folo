@@ -530,7 +530,7 @@
                 <plugin>
                     <groupId>org.gaul</groupId>
                     <artifactId>modernizer-maven-plugin</artifactId>
-                    <version>2.7.0</version>
+                    <version>3.1.0</version>
                     <configuration>
                         <failOnViolations>false</failOnViolations>
                         <javaVersion>${version.jdk}</javaVersion>
@@ -541,7 +541,7 @@
                             <goals>
                                 <goal>modernizer</goal>
                             </goals>
-                            <phase>process-test-classes</phase>
+                            <phase>verify</phase>
                         </execution>
                     </executions>
                 </plugin>
