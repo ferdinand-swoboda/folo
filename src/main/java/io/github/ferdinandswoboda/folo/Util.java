@@ -23,7 +23,7 @@ final class Util {
         .orElseThrow(
             () ->
                 new IllegalArgumentException(
-                    String.format("Table %s has no foreign key into %s", from, into)));
+                    "Table %s has no foreign key into %s".formatted(from, into)));
   }
 
   static <L extends Record, R extends Record> Optional<TableField<?, Long>> getOptionalForeignKey(
@@ -36,8 +36,10 @@ final class Util {
     }
     validate(
         keys.size() == 1,
-        "One-to-* relationship between %s and %s is ambiguous, "
-            + "please specify the foreign key explicitly",
+        """
+            One-to-* relationship between %s and %s is ambiguous,
+            please specify the foreign key explicitly
+            """,
         fromTable.getName(),
         intoTable.getName());
     return Optional.of(getKey(from, keys.get(0).getFields(), "foreign"));

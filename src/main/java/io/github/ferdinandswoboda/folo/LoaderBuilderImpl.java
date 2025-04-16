@@ -111,8 +111,10 @@ final class LoaderBuilderImpl<T> implements LoaderBuilder<T> {
     Optional<TableField<?, Long>> rightKey = Util.getOptionalForeignKey(left, right);
     Util.validate(
         leftKey.isEmpty() || rightKey.isEmpty() || leftKey.equals(rightKey),
-        "One-to-one relationship between %s and %s is ambiguous, "
-            + "please specify the foreign key explicitly",
+        """
+            One-to-one relationship between %s and %s is ambiguous,
+            please specify the foreign key explicitly
+            """,
         left.getName(),
         right.getName());
     return leftKey.or(() -> rightKey).orElseThrow(IllegalStateException::new);
