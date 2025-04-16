@@ -61,8 +61,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <revision>LOCAL-SNAPSHOT</revision>
         <version.auto-service>1.1.1</version.auto-service>
-        <version.error-prone>2.23.0</version.error-prone>
-        <version.error-prone-support>0.14.0</version.error-prone-support>
+        <version.error-prone>2.37.0</version.error-prone>
+        <version.error-prone-support>0.21.0</version.error-prone-support>
         <version.guava>33.4.8-jre</version.guava>
         <version.guava-beta-checker>1.0</version.guava-beta-checker>
         <version.jdk>17</version.jdk>
@@ -792,6 +792,7 @@
                                     ${error-prone.args}
                                 </arg>
                                 <arg>-XDcompilePolicy=simple</arg>
+                                <arg>--should-stop=ifError=FLOW</arg>
                             </compilerArgs>
                             <showWarnings>true</showWarnings>
                         </configuration>

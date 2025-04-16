@@ -65,8 +65,10 @@ final class TestUtil {
     @Nullable private Object[] relatedFooIds;
     @Nullable private Integer v;
     @Nullable private ImmutableList<BarEntity> barList;
+
     @SuppressWarnings("NullableOptional")
-    @Nullable private Optional<BarEntity> barOptional;
+    @Nullable
+    private Optional<BarEntity> barOptional;
 
     FooEntity(long id, int foo) {
       this(id, foo, null);
@@ -131,10 +133,9 @@ final class TestUtil {
       if (o == this || other.contains(o)) {
         return true;
       }
-      if (!(o instanceof FooEntity)) {
+      if (!(o instanceof FooEntity fooEntity)) {
         return false;
       }
-      var fooEntity = (FooEntity) o;
       @Var
       boolean result =
           id == fooEntity.id
@@ -174,11 +175,16 @@ final class TestUtil {
     @Nullable private final Long bazId;
 
     @Nullable private FooEntity foo;
+
     @SuppressWarnings("NullableOptional")
-    @Nullable private Optional<FooEntity> fooOptional;
+    @Nullable
+    private Optional<FooEntity> fooOptional;
+
     @Nullable private ImmutableList<FooEntity> fooList;
+
     @SuppressWarnings("NullableOptional")
-    @Nullable private Optional<BarEntity> otherBar;
+    @Nullable
+    private Optional<BarEntity> otherBar;
 
     BarEntity(
         long id, @Nullable Long fooId, int bar, @Nullable Long otherBarId, @Nullable Long bazId) {
@@ -218,10 +224,9 @@ final class TestUtil {
       if (o == this || other.contains(o)) {
         return true;
       }
-      if (!(o instanceof BarEntity)) {
+      if (!(o instanceof BarEntity barEntity)) {
         return false;
       }
-      var barEntity = (BarEntity) o;
       @Var
       boolean result =
           id == barEntity.id

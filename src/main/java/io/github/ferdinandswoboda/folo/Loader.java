@@ -3,6 +3,7 @@ package io.github.ferdinandswoboda.folo;
 import static java.util.Collections.emptySet;
 import static java.util.Objects.requireNonNull;
 
+import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -11,8 +12,6 @@ import java.util.function.BinaryOperator;
 import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collector;
-
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import org.jooq.Record;
 
 /**
