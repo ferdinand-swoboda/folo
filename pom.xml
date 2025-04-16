@@ -792,6 +792,7 @@
                                     ${error-prone.args}
                                 </arg>
                                 <arg>-XDcompilePolicy=simple</arg>
+                                <arg>--should-stop=ifError=FLOW</arg>
                             </compilerArgs>
                             <showWarnings>true</showWarnings>
                         </configuration>
