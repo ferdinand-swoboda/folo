@@ -67,7 +67,7 @@
         <version.guava-beta-checker>1.0</version.guava-beta-checker>
         <version.jdk>21</version.jdk>
         <version.jmh>1.37</version.jmh>
-        <version.jooq>3.18.7</version.jooq>
+        <version.jooq>3.20.3</version.jooq>
         <version.maven>3.9.0</version.maven>
         <version.maven-plugin-tools>3.15.1</version.maven-plugin-tools>
         <version.mockito>5.17.0</version.mockito>
