@@ -14,8 +14,8 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.StringJoiner;
 import java.util.function.Supplier;
-import org.jetbrains.annotations.Nullable;
 import org.jooq.Record;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Mutable graph of objects loaded by {@link Entity entities}. Objects are linked by {@link IdPair

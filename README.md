@@ -132,7 +132,6 @@ dependencies {
 
 - Make use of Java modules (introduced in Java 9).
 - Only primary / foreign keys of (Java) type `long` are supported i.e. no composite or UUID keys.
-- Investigate nullness annotations (e.g. `javax.annotations`, `org.jspecify`).
 - Investigate `@Contract` annotations (`org.jetbrains`).
 - Relation mapping does not work for entities that are not based on a table in the DB schema.
 
