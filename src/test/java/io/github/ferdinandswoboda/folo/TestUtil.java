@@ -15,7 +15,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Stream;
-import org.jetbrains.annotations.Nullable;
 import org.jooq.DSLContext;
 import org.jooq.Field;
 import org.jooq.Record;
@@ -23,6 +22,7 @@ import org.jooq.Table;
 import org.jooq.TableField;
 import org.jooq.impl.DefaultConfiguration;
 import org.jooq.impl.DefaultDSLContext;
+import org.jspecify.annotations.Nullable;
 
 final class TestUtil {
   private static final DSLContext MOCK_CONTEXT = new DefaultDSLContext(new DefaultConfiguration());
@@ -62,25 +62,24 @@ final class TestUtil {
     private final Multiset<FooEntity> other = HashMultiset.create();
     private final long id;
     private final int foo;
-    @Nullable private Object[] relatedFooIds;
-    @Nullable private Integer v;
-    @Nullable private ImmutableList<BarEntity> barList;
+    private Object @Nullable [] relatedFooIds;
+    private @Nullable Integer v;
+    private @Nullable ImmutableList<BarEntity> barList;
 
     @SuppressWarnings("NullableOptional")
-    @Nullable
-    private Optional<BarEntity> barOptional;
+    private @Nullable Optional<BarEntity> barOptional;
 
     FooEntity(long id, int foo) {
       this(id, foo, null);
     }
 
-    FooEntity(long id, int foo, @Nullable Object[] relatedFooIds) {
+    FooEntity(long id, int foo, Object @Nullable [] relatedFooIds) {
       this.id = id;
       this.foo = foo;
       this.relatedFooIds = relatedFooIds;
     }
 
-    FooEntity(long id, int foo, @Nullable Object[] relatedFooIds, int v) {
+    FooEntity(long id, int foo, Object @Nullable [] relatedFooIds, int v) {
       this.id = id;
       this.foo = foo;
       this.relatedFooIds = relatedFooIds;
@@ -169,22 +168,20 @@ final class TestUtil {
   public static final class BarEntity {
     private final Multiset<BarEntity> other = HashMultiset.create();
     private final long id;
-    @Nullable private final Long fooId;
+    private final @Nullable Long fooId;
     private final int bar;
-    @Nullable private final Long otherBarId;
-    @Nullable private final Long bazId;
+    private final @Nullable Long otherBarId;
+    private final @Nullable Long bazId;
 
-    @Nullable private FooEntity foo;
-
-    @SuppressWarnings("NullableOptional")
-    @Nullable
-    private Optional<FooEntity> fooOptional;
-
-    @Nullable private ImmutableList<FooEntity> fooList;
+    private @Nullable FooEntity foo;
 
     @SuppressWarnings("NullableOptional")
-    @Nullable
-    private Optional<BarEntity> otherBar;
+    private @Nullable Optional<FooEntity> fooOptional;
+
+    private @Nullable ImmutableList<FooEntity> fooList;
+
+    @SuppressWarnings("NullableOptional")
+    private @Nullable Optional<BarEntity> otherBar;
 
     BarEntity(
         long id, @Nullable Long fooId, int bar, @Nullable Long otherBarId, @Nullable Long bazId) {

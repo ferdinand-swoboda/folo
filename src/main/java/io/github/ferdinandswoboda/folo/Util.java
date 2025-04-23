@@ -3,12 +3,12 @@ package io.github.ferdinandswoboda.folo;
 import com.google.errorprone.annotations.FormatMethod;
 import java.util.List;
 import java.util.Optional;
-import org.jetbrains.annotations.Nullable;
 import org.jooq.ForeignKey;
 import org.jooq.Record;
 import org.jooq.Table;
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
+import org.jspecify.annotations.Nullable;
 
 final class Util {
   private Util() {}
@@ -42,7 +42,7 @@ final class Util {
             """,
         fromTable.getName(),
         intoTable.getName());
-    return Optional.of(getKey(from, keys.get(0).getFields(), "foreign"));
+    return Optional.of(getKey(from, keys.getFirst().getFields(), "foreign"));
   }
 
   @FormatMethod

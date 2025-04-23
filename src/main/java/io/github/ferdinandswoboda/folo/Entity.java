@@ -6,10 +6,10 @@ import static java.util.stream.Stream.concat;
 
 import java.util.Objects;
 import java.util.Optional;
-import org.jetbrains.annotations.Nullable;
 import org.jooq.Field;
 import org.jooq.Record;
 import org.jooq.Table;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Represents a mapping from a {@link Table table} to a {@link Class class}. This class is used to
@@ -23,7 +23,7 @@ public final class Entity<T, R extends Record> {
   private final Class<T> type;
   private final Field<?>[] fields;
 
-  @Nullable private Field<?>[] resultFields;
+  private Field<?> @Nullable [] resultFields;
 
   /**
    * Creates a mapping from a {@link Table table} to the given {@link Class class}.
@@ -111,7 +111,7 @@ public final class Entity<T, R extends Record> {
      * record contains FOO.ID=1 and BAR.X=1, then without this measure, BAR.X would be used
      * instead of FOO.X.
      */
-    @Nullable T result = record.into(resultFields).into(type);
+    T result = record.into(resultFields).into(type);
     requireNonNull(result);
     return result;
   }

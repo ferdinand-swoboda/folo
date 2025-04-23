@@ -10,11 +10,11 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
-import org.jetbrains.annotations.Nullable;
 import org.jooq.Field;
 import org.jooq.ForeignKey;
 import org.jooq.Record;
 import org.jooq.TableField;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Class used to specify a {@link Relation}. Cannot be instantiated directly, but is created as part
@@ -24,12 +24,12 @@ public final class RelationBuilder<T, L, R> {
   private final LoaderBuilderImpl<T> builder;
   private final Entity<L, ?> left;
   private final Entity<R, ?> right;
-  @Nullable private Field<Long> leftKey;
-  @Nullable private Field<Long> rightKey;
-  @Nullable private Arity leftArity;
-  @Nullable private Arity rightArity;
-  @Nullable private BiConsumer<L, ?> leftSetter;
-  @Nullable private BiConsumer<R, ?> rightSetter;
+  private @Nullable Field<Long> leftKey;
+  private @Nullable Field<Long> rightKey;
+  private @Nullable Arity leftArity;
+  private @Nullable Arity rightArity;
+  private @Nullable BiConsumer<L, ?> leftSetter;
+  private @Nullable BiConsumer<R, ?> rightSetter;
   private Optional<Function<Record, Set<IdPair>>> relationLoader = Optional.empty();
 
   RelationBuilder(LoaderBuilderImpl<T> builder, Entity<L, ?> left, Entity<R, ?> right) {
