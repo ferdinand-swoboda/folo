@@ -60,20 +60,15 @@
         <project.build.outputTimestamp>${git.commit.time}</project.build.outputTimestamp>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <revision>LOCAL-SNAPSHOT</revision>
-        <version.auto-service>1.1.1</version.auto-service>
         <version.error-prone>2.38.0</version.error-prone>
         <version.error-prone-support>0.22.0</version.error-prone-support>
         <version.guava>33.4.8-jre</version.guava>
-        <version.guava-beta-checker>1.0</version.guava-beta-checker>
         <version.jdk>21</version.jdk>
         <version.jmh>1.37</version.jmh>
         <version.jooq>3.20.3</version.jooq>
         <version.maven>3.9.0</version.maven>
         <version.maven-plugin-tools>3.15.1</version.maven-plugin-tools>
         <version.mockito>5.17.0</version.mockito>
-        <version.nullaway>0.12.6</version.nullaway>
-        <version.postgresql>42.7.5</version.postgresql>
-        <version.surefire>3.5.3</version.surefire>
     </properties>
 
     <dependencyManagement>
@@ -140,11 +135,7 @@
                 <artifactId>mockito-bom</artifactId>
                 <version>${version.mockito}</version>
                 <type>pom</type>
-            </dependency>
-            <dependency>
-                <groupId>org.postgresql</groupId>
-                <artifactId>postgresql</artifactId>
-                <version>${version.postgresql}</version>
+                <scope>import</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -488,7 +479,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
-                    <version>${version.surefire}</version>
+                    <version>3.5.3</version>
                     <configuration>
                         <includes>
                             <include>**/*Test.java</include>
@@ -558,7 +549,7 @@
                         <dependency>
                             <groupId>org.postgresql</groupId>
                             <artifactId>postgresql</artifactId>
-                            <version>${version.postgresql}</version>
+                            <version>42.7.5</version>
                         </dependency>
                     </dependencies>
                 </plugin>
@@ -714,12 +705,12 @@
                                 <path>
                                     <groupId>com.google.guava</groupId>
                                     <artifactId>guava-beta-checker</artifactId>
-                                    <version>${version.guava-beta-checker}</version>
+                                    <version>1.0</version>
                                 </path>
                                 <path>
                                     <groupId>com.uber.nullaway</groupId>
                                     <artifactId>nullaway</artifactId>
-                                    <version>${version.nullaway}</version>
+                                    <version>0.12.6</version>
                                 </path>
                                 <path>
                                     <groupId>com.google.errorprone</groupId>
