@@ -372,7 +372,6 @@
                             <!-- </requireMavenVersion>-->
                             <requirePluginVersions/>
                             <requireReleaseDeps/>
-                            <requirePluginVersions/>
                             <requireSameVersions/>
                             <requireUpperBoundDeps/>
                         </rules>
