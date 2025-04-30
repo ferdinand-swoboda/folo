@@ -710,7 +710,7 @@
                                 <path>
                                     <groupId>com.uber.nullaway</groupId>
                                     <artifactId>nullaway</artifactId>
-                                    <version>0.12.6</version>
+                                    <version>0.12.7</version>
                                 </path>
                                 <path>
                                     <groupId>com.google.errorprone</groupId>
