@@ -61,7 +61,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <revision>LOCAL-SNAPSHOT</revision>
         <version.error-prone>2.39.0</version.error-prone>
-        <version.error-prone-support>0.23.0</version.error-prone-support>
+        <version.error-prone-support>0.24.0</version.error-prone-support>
         <version.guava>33.4.8-jre</version.guava>
         <version.jdk>21</version.jdk>
         <version.jmh>1.37</version.jmh>
